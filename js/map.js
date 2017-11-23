@@ -47,7 +47,7 @@
     var btn = document.createElement('button');
     btn.style.left = relatedAds[i].location.x - 23 + 'px';
     btn.style.top = relatedAds[i].location.y - 64 + 'px';
-    btn.classList.add('map__pin'); 
+    btn.classList.add('map__pin');
 
     var img = document.createElement('img');
     img.src = relatedAds[i].author.avatar;
@@ -135,4 +135,4 @@ function getRoomsEnding(x) {
     return ' комнат для ';
   }
   return ' комнаты для ';
-};
+}
