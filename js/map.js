@@ -1,6 +1,6 @@
 'use strict';
 
-(function() {
+(function () {
   var relatedAds = [];
   var realtyDescriptions = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var realtyTypes = ['flat', 'house', 'bungalo'];
@@ -9,8 +9,8 @@
   var map = document.querySelector('.map');
   var fragmentPin = document.createDocumentFragment();
   var mapPins = document.querySelector('.map__pins');
-  var template = document.querySelector('template');  
-  var fragmentAd = document.createDocumentFragment(); 
+  var template = document.querySelector('template');
+  var fragmentAd = document.createDocumentFragment();
 
   for (var i = 0; i < 8; i++) {
     relatedAds[i] = {
@@ -36,18 +36,18 @@
         'x': getRandomValue(300, 900),
         'y': getRandomValue(100, 500)
       }
-    } 
+    };
 
     relatedAds[i].offer.address = relatedAds[i].location.x + ', ' + relatedAds[i].location.y;
   }
 
   map.classList.remove('map--faded');
 
-  for (var i = 0; i < relatedAds.length; i++) {  
+  for (i = 0; i < relatedAds.length; i++) {
     var btn = document.createElement('button');
     btn.style.left = relatedAds[i].location.x - 23 + 'px';
-    btn.style.top = relatedAds[i].location.y - 64 + 'px'; 
-    btn.classList.add('map__pin');  
+    btn.style.top = relatedAds[i].location.y - 64 + 'px';
+    btn.classList.add('map__pin'); 
 
     var img = document.createElement('img');
     img.src = relatedAds[i].author.avatar;
@@ -61,7 +61,7 @@
 
   mapPins.appendChild(fragmentPin);
 
-  for (var i = 0; i < 1/*relatedAds.length*/; i++) {  
+  for (i = 0; i < 1/* relatedAds.length*/; i++) {  
     var element = template.content.cloneNode(true);
     element.removeChild(element.children[1]);
 
@@ -81,34 +81,34 @@
     type.innerText = getRussian(relatedAds[i].offer.type);
 
     var rooms = element.querySelectorAll('p')[2];
-    rooms.innerText = relatedAds[i].offer.rooms + ' комнаты для ' + relatedAds[i].offer.guests + ' гостей';    
+    rooms.innerText = relatedAds[i].offer.rooms + getRoomsEnding(relatedAds[i].offer.rooms) + relatedAds[i].offer.guests + ' гостей';
 
     var checkin = element.querySelectorAll('p')[3];
     checkin.innerText = 'Заезд после ' + relatedAds[i].offer.checkin + ', выезд до ' + relatedAds[i].offer.checkout;
-    
-    var features = element.querySelector('.popup__features');
+
+    var featuresBlock = element.querySelector('.popup__features');
     var numberOfFeatures = relatedAds[i].offer.features.length;
 
-    for (var j = numberOfFeatures; j < features.children.length; ) {
-      features.removeChild(features.children[j]);  
+    for (var j = numberOfFeatures; j < featuresBlock.children.length;) {
+      featuresBlock.removeChild(featuresBlock.children[j]);
     }
 
     var description = element.querySelectorAll('p')[4];
     description.innerText = relatedAds[i].offer.description;
 
     fragmentAd.appendChild(element);
-  } 
+  }
 
-  map.appendChild(fragmentAd); 
+  map.appendChild(fragmentAd);
 })();
 
 function getRandomValue(min, max) {
-  return min + Math.floor(Math.random() * (max + 1 - min));;
-};
+  return min + Math.floor(Math.random() * (max + 1 - min));
+}
 
 function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
-};
+}
 
 function getRandomLengthArray(arr) {
   var newArr = [];
@@ -117,16 +117,16 @@ function getRandomLengthArray(arr) {
     newArr[i] = arr[i];
   }
   return newArr;
-};
+}
 
 function getRussian(x) {
   if (x === 'flat') {
     return 'Квартира';
   } else if (x === 'house') {
     return 'Дом';
-  } 
+  }
   return 'Бунгало';
-};
+}
 
 function getRoomsEnding(x) {
   if (x === 1) {
@@ -134,5 +134,5 @@ function getRoomsEnding(x) {
   } else if (x === 5) {
     return ' комнат для ';
   }
-  return ' комнаты для';
+  return ' комнаты для ';
 };
