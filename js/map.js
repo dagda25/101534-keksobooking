@@ -6,7 +6,12 @@
   var realtyTypes = ['flat', 'house', 'bungalo'];
   var chekinTimes = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
-  
+  var map = document.querySelector('.map');
+  var fragmentPin = document.createDocumentFragment();
+  var mapPins = document.querySelector('.map__pins');
+  var template = document.querySelector('template');  
+  var fragmentAd = document.createDocumentFragment(); 
+
   for (var i = 0; i < 8; i++) {
     relatedAds[i] = {
       'author': {
@@ -36,12 +41,8 @@
     relatedAds[i].offer.address = relatedAds[i].location.x + ', ' + relatedAds[i].location.y;
   }
 
-  var map = document.querySelector('.map');
   map.classList.remove('map--faded');
 
-  var fragmentPin = document.createDocumentFragment();
-  var mapPins = document.querySelector('.map__pins');
-  
   for (var i = 0; i < relatedAds.length; i++) {  
     var btn = document.createElement('button');
     btn.style.left = relatedAds[i].location.x - 23 + 'px';
@@ -59,9 +60,6 @@
   }
 
   mapPins.appendChild(fragmentPin);
-
-  var template = document.querySelector('template');  
-  var fragmentAd = document.createDocumentFragment(); 
 
   for (var i = 0; i < 1/*relatedAds.length*/; i++) {  
     var element = template.content.cloneNode(true);
@@ -90,6 +88,7 @@
     
     var features = element.querySelector('.popup__features');
     var numberOfFeatures = relatedAds[i].offer.features.length;
+
     for (var j = numberOfFeatures; j < features.children.length; ) {
       features.removeChild(features.children[j]);  
     }
