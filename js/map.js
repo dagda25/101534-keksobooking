@@ -10,19 +10,19 @@
   createPins(relatedAds).appendChild(createAds(relatedAds));
 })();
 
-function getRandomValue (min, max) {
+function getRandomValue(min, max) {
   return min + Math.floor(Math.random() * (max + 1 - min));
 }
 
-function getRandomElement (arr) {
+function getRandomElement(arr) {
   return arr[getRandomValue(0, arr.length - 1)];
 }
 
-function getRandomLengthArray (arr) {
+function getRandomLengthArray(arr) {
   return arr.slice(0, getRandomValue(0, arr.length));
 }
 
-function getLocalName (x) {
+function getLocalName(x) {
   if (x === 'flat') {
     return 'Квартира';
   } else if (x === 'house') {
@@ -31,7 +31,7 @@ function getLocalName (x) {
   return 'Бунгало';
 }
 
-function getRoomsEnding (x) {
+function getRoomsEnding(x) {
   if (x === 1) {
     return ' комната для ';
   } else if (x === 5) {
@@ -40,7 +40,7 @@ function getRoomsEnding (x) {
   return ' комнаты для ';
 }
 
-function getRelatedAd (relatedAds, i) {
+function getRelatedAd(relatedAds, i) {
   var realtyDescriptions = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var realtyTypes = ['flat', 'house', 'bungalo'];
   var chekinTimes = ['12:00', '13:00', '14:00'];
@@ -74,7 +74,7 @@ function getRelatedAd (relatedAds, i) {
   relatedAds[i].offer.address = relatedAds[i].location.x + ', ' + relatedAds[i].location.y;
 }
 
-function createPins (relatedAds) {
+function createPins(relatedAds) {
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
   map.classList.remove('map--faded');
@@ -102,7 +102,7 @@ function createPins (relatedAds) {
   return map;
 }
 
-function createAds (relatedAds) {
+function createAds(relatedAds) {
   var template = document.querySelector('template');
   var fragmentAd = document.createDocumentFragment();
 
