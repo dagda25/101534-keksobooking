@@ -4,7 +4,7 @@
   var relatedAds = [];
 
   for (var i = 0; i < 8; i++) {
-    getRelatedAd(relatedAds, i);
+    relatedAds[i] = getRelatedAd(i);   
   }
 
   createPins(relatedAds).appendChild(createAds(relatedAds));
@@ -40,13 +40,14 @@ function getRoomsEnding(x) {
   return ' комнаты для ';
 }
 
-function getRelatedAd(relatedAds, i) {
+function getRelatedAd(i) {
   var realtyDescriptions = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var realtyTypes = ['flat', 'house', 'bungalo'];
-  var chekinTimes = ['12:00', '13:00', '14:00'];
+  var checkinTimes = ['12:00', '13:00', '14:00'];
+  var checkoutTimes = ['12:00', '13:00', '14:00'];  
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
-  relatedAds[i] = {
+  var obj = {
     'author': {
       'avatar': 'img/avatars/user0' + (i + 1) + '.png'
     },
@@ -58,8 +59,8 @@ function getRelatedAd(relatedAds, i) {
       'type': getRandomElement(realtyTypes),
       'rooms': getRandomValue(1, 5),
       'guests': getRandomValue(1, 10),
-      'checkin': getRandomElement(chekinTimes),
-      'checkout': getRandomElement(chekinTimes),
+      'checkin': getRandomElement(checkinTimes),
+      'checkout': getRandomElement(checkoutTimes),
       'features': getRandomLengthArray(features),
       'description': '',
       'photos': []
@@ -71,7 +72,9 @@ function getRelatedAd(relatedAds, i) {
     }
   };
 
-  relatedAds[i].offer.address = relatedAds[i].location.x + ', ' + relatedAds[i].location.y;
+  obj.offer.address = obj.location.x + ', ' + obj.location.y;
+  
+  return obj;
 }
 
 function createPins(relatedAds) {
