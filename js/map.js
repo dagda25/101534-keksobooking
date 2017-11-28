@@ -4,7 +4,7 @@
   var relatedAds = [];
 
   for (var i = 0; i < 8; i++) {
-    relatedAds[i] = getRelatedAd(i);   
+    relatedAds[i] = getRelatedAd(i);
   }
 
   createPins(relatedAds).appendChild(createAds(relatedAds));
@@ -44,7 +44,7 @@ function getRelatedAd(i) {
   var realtyDescriptions = ['Большая уютная квартира', 'Маленькая неуютная квартира', 'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик', 'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
   var realtyTypes = ['flat', 'house', 'bungalo'];
   var checkinTimes = ['12:00', '13:00', '14:00'];
-  var checkoutTimes = ['12:00', '13:00', '14:00'];  
+  var checkoutTimes = ['12:00', '13:00', '14:00'];
   var features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 
   var obj = {
@@ -73,7 +73,6 @@ function getRelatedAd(i) {
   };
 
   obj.offer.address = obj.location.x + ', ' + obj.location.y;
-  
   return obj;
 }
 
