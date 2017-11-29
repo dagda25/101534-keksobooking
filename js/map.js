@@ -7,8 +7,8 @@ var relatedAds = [];
 var map = document.querySelector('.map');
 var mapPinMain = map.querySelector('.map__pin--main');
 
-for (var x = 0; x < 8; x++) {
-  relatedAds[x] = getRelatedAd(x);
+for (var q = 0; q < 8; q++) {
+  relatedAds[q] = getRelatedAd(q);
 }
 
 createPins(relatedAds).appendChild(createAds(relatedAds));
