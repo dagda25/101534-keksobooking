@@ -1,14 +1,44 @@
 'use strict';
 
-(function () {
-  var relatedAds = [];
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
-  for (var i = 0; i < 8; i++) {
-    relatedAds[i] = getRelatedAd(i);
+var relatedAds = [];
+var map = document.querySelector('.map');
+var mapPinMain = map.querySelector('.map__pin--main');
+
+for (var i = 0; i < 8; i++) {
+  relatedAds[i] = getRelatedAd(i);
+}
+
+createPins(relatedAds).appendChild(createAds(relatedAds));
+
+var mapPin = map.querySelectorAll('.map__pin');
+var popups = map.querySelectorAll('.popup');
+var popupClose = map.querySelectorAll('.popup__close');
+
+
+for (var i = 1; i < mapPin.length; i++) {
+  mapPin[i].addEventListener('click', onMapPinClick);
+}
+
+for (i = 0; i < popupClose.length; i++) {
+  popupClose[i].addEventListener('click', onPopupCloseClick);
+}
+
+mapPinMain.addEventListener('mouseup', function() {
+  activateMap();
+  activateForm();  
+  showMapPins();
+});
+
+mapPinMain.addEventListener('keyup', function(evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    activateMap();
+    activateForm();  
+    showMapPins();
   }
-
-  createPins(relatedAds).appendChild(createAds(relatedAds));
-})();
+});
 
 function getRandomValue(min, max) {
   return min + Math.floor(Math.random() * (max + 1 - min));
@@ -79,7 +109,6 @@ function getRelatedAd(i) {
 function createPins(relatedAds) {
   var map = document.querySelector('.map');
   var mapPins = map.querySelector('.map__pins');
-  map.classList.remove('map--faded');
 
   for (var i = 0; i < relatedAds.length; i++) {
     var pinWidth = 46;
@@ -89,6 +118,7 @@ function createPins(relatedAds) {
     btn.style.left = relatedAds[i].location.x - pinWidth / 2 + 'px';
     btn.style.top = relatedAds[i].location.y - pinHeight + 'px';
     btn.classList.add('map__pin');
+    btn.classList.add('hidden');
 
     var img = document.createElement('img');
     img.src = relatedAds[i].author.avatar;
@@ -108,9 +138,10 @@ function createAds(relatedAds) {
   var template = document.querySelector('template');
   var fragmentAd = document.createDocumentFragment();
 
-  for (var i = 0; i < 1; i++) {
+  for (var i = 0; i < relatedAds.length; i++) {
     var element = template.content.cloneNode(true);
     element.removeChild(element.children[1]);
+    element.children[0].classList.add('hidden');
 
     var avatar = element.querySelector('.popup__avatar');
     avatar.src = relatedAds[i].author.avatar;
@@ -147,4 +178,81 @@ function createAds(relatedAds) {
   }
 
   return fragmentAd;
+};
+
+function activateMap() {
+  var map = document.querySelector('.map');
+
+  map.classList.remove('map--faded');  
+}
+
+function activateForm() {
+  var form = document.querySelector('.notice__form');
+  var fieldset = form.querySelectorAll('fieldset'); 
+   
+  form.classList.remove('notice__form--disabled');  
+
+  for (var i = 0; i < fieldset.length; i++) {
+    fieldset[i].disabled = false;
+  }
+}
+
+function showMapPins() {
+  var map = document.querySelector('.map');
+  var mapPins = map.querySelectorAll('.map__pin');
+
+  for (var i = 1; i < mapPins.length; i++) {
+    mapPins[i].classList.remove('hidden'); 
+  }
+}
+
+function openPopup(element) {
+  element.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+}
+
+function closePopup(element) {
+  element.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+
+  for (var j = 1; j < mapPin.length; j++) {
+    mapPin[j].classList.remove('map__pin--active');
+  } 
+}
+
+function onMapPinClick(evt) {
+  for (var i = 0; i < popups.length; i++) {
+    popups[i].classList.add('hidden');
+  }
+
+  for (var j = 1; j < mapPin.length; j++) {
+    mapPin[j].classList.remove('map__pin--active');
+  }
+
+  evt.currentTarget.classList.add('map__pin--active');
+  openPopup(popups[getElementNumber(evt.currentTarget) - 2]);  
+}
+
+function onPopupCloseClick(evt) {
+  closePopup(evt.currentTarget.parentNode); 
+}
+
+function onPopupEscPress(evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+
+    for (var j = 0; j < popups.length; j++) {
+      closePopup(popups[j]);
+    }
+
+  }
+}
+
+function getElementNumber(el) {
+  var i = 0;
+
+  while (el = el.previousSibling) {
+    el.nodeType == 1 && i++;
+  }
+
+  return i;
 }
