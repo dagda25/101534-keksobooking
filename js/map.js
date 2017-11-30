@@ -1,7 +1,6 @@
 'use strict';
 
-(function() {
-  var ESC_KEYCODE = 27;
+(function () {
   var ENTER_KEYCODE = 13;
 
   var relatedAds = [];
@@ -22,11 +21,11 @@
   for (i = 1; i < mapPins.length; i++) {
     mapPins[i].addEventListener('click', function (evt) {
       onMapPinClick(evt, popups, mapPins);
-    })
+    });
   }
 
   for (i = 0; i < popupClose.length; i++) {
-    popupClose[i].addEventListener('click', function(evt) {
+    popupClose[i].addEventListener('click', function (evt) {
       onPopupCloseClick(evt, mapPins);
     });
   }
@@ -39,12 +38,12 @@
 
   mapPinMain.addEventListener('keyup', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
-    activateMap(map);
-    activateForm(form);
-    showMapPins(mapPins);
+      activateMap(map);
+      activateForm(form);
+      showMapPins(mapPins);
     }
   });
-})()
+})();
 
 function getRandomValue(min, max) {
   return min + Math.floor(Math.random() * (max + 1 - min));
@@ -85,7 +84,7 @@ function getRelatedAd(i) {
 
   var obj = {
     'author': {
-      'avatar': 'img/avatars/user0' + (i+ 1) + '.png'
+      'avatar': 'img/avatars/user0' + (i + 1) + '.png'
     },
 
     'offer': {
@@ -185,7 +184,7 @@ function createSingleAd(relatedAds, i) {
   }
 
   var description = element.querySelectorAll('p')[4];
-  description.innerText = relatedAds[i].offer.description;  
+  description.innerText = relatedAds[i].offer.description;
 
   return element;
 }
@@ -232,7 +231,7 @@ function onMapPinClick(evt, popups, mapPins) {
   for (var j = 1; j < mapPins.length; j++) {
     mapPins[j].classList.remove('map__pin--active');
     if (mapPins[j] === evt.currentTarget) {
-      openPopup(popups[j - 1]); 
+      openPopup(popups[j - 1]);
     }
   }
 
@@ -259,7 +258,7 @@ function onPopupEscPress(evt) {
   }
 }
 
-(function() {
+(function () {
   var form = document.querySelector('.notice__form');
   var timeIn = form.querySelector('select#timein');
   var timeOut = form.querySelector('select#timeout');
@@ -285,17 +284,16 @@ function onPopupEscPress(evt) {
   });
 
   form.addEventListener('invalid', function (evt) {
-    console.log(evt.target);
     evt.target.style.outline = '3px solid red';
   }, true);
-})()
+})();
 
 function onTimeInChange(evt, timeOut) {
-  timeOut.value = evt.target.value;  
+  timeOut.value = evt.target.value;
 }
 
 function onTimeOutChange(evt, timeIn) {
-  timeIn.value = evt.target.value;  
+  timeIn.value = evt.target.value;
 }
 
 function onTypeChange(evt, price) {
@@ -306,17 +304,17 @@ function onTypeChange(evt, price) {
 
   switch (evt.target.value) {
     case 'flat':
-      price.min = 1000;
-      break; 
+      price.min = flatMinPrice;
+      break;
     case 'bungalo':
-      price.min = 0;
-      break; 
+      price.min = bungaloMinPrice;
+      break;
     case 'house':
-      price.min = 5000;
-      break; 
+      price.min = houseMinPrice;
+      break;
     case 'palace':
-      price.min = 10000;
-      break;            
+      price.min = palaceMinPrice;
+      break;          
   }
 }
 
