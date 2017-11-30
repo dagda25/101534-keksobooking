@@ -314,7 +314,7 @@ function onTypeChange(evt, price) {
       break;
     case 'palace':
       price.min = palaceMinPrice;
-      break;          
+      break; 
   }
 }
 
