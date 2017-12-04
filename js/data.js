@@ -35,7 +35,7 @@
 
     obj.offer.address = obj.location.x + ', ' + obj.location.y;
     return obj;
-  }  
+  };
 
   function getRandomValue(min, max) {
     return min + Math.floor(Math.random() * (max + 1 - min));

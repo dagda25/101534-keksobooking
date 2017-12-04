@@ -27,5 +27,5 @@
       mapPins.appendChild(fragmentPin);
     }
     return map;
-  }
+  };
 })();

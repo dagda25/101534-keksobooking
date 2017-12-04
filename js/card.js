@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.createAds = function (relatedAds){
+  window.createAds = function (relatedAds) {
     var fragmentAd = document.createDocumentFragment();
 
     for (var i = 0; i < relatedAds.length; i++) {
@@ -9,7 +9,7 @@
     }
 
     return fragmentAd;
-  }
+  };
 
   function createSingleAd(relatedAds, i) {
     var template = document.querySelector('template');
