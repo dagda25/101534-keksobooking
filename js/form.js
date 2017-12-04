@@ -5,20 +5,20 @@
   var timeIn = form.querySelector('select#timein');
   var timeOut = form.querySelector('select#timeout');
   var type = form.querySelector('select#type');
-  var price = form.querySelector('input#price');
+  var priceInput = form.querySelector('input#price');
   var roomNumber = form.querySelector('select#room_number');
   var capacity = form.querySelector('select#capacity');
 
   timeIn.addEventListener('change', function (evt) {
-    onTimeInChange(evt, timeOut);
+    onTimeChange(evt, timeOut);
   });
 
   timeOut.addEventListener('change', function (evt) {
-    onTimeOutChange(evt, timeIn);
+    onTimeChange(evt, timeIn);
   });
 
   type.addEventListener('change', function (evt) {
-    onTypeChange(evt, price);
+    onTypeChange(evt, priceInput);
   });
 
   roomNumber.addEventListener('change', function (evt) {
@@ -29,12 +29,8 @@
     evt.target.style.outline = '3px solid red';
   }, true);
 
-  function onTimeInChange(evt, timeOut) {
-    timeOut.value = evt.target.value;
-  }
-
-  function onTimeOutChange(evt, timeIn) {
-    timeIn.value = evt.target.value;
+  function onTimeChange(evt, t) {
+    t.value = evt.target.value;
   }
 
   function onTypeChange(evt, price) {
@@ -59,11 +55,11 @@
     }
   }
 
-  function onRoomNumberChange(evt, capacity) {
+  function onRoomNumberChange(evt, cap) {
     if (evt.target.value === '100') {
-      capacity.value = 0;
+      cap.value = 0;
     } else {
-      capacity.value = evt.target.value;
+      cap.value = evt.target.value;
     }
   }
 })();
