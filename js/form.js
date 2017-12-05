@@ -55,7 +55,7 @@
         break;
     }
 
-    return minPrice;   
+    return minPrice;
   }
 
   function onRoomNumberChange(rooms) {
@@ -63,10 +63,9 @@
 
     if (rooms === '100') {
       roomsCapacity = 0;
-    } else if (rooms === '1'){
+    } else if (rooms === '1') {
       roomsCapacity = 1;
-    }
-      else if (rooms === '2'){
+    } else if (rooms === '2') {
       roomsCapacity = 2;
     } else {
       roomsCapacity = 3;
