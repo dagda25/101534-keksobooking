@@ -16,36 +16,24 @@
       'offer': {
         'title': realtyDescriptions[i],
         'address': '',
-        'price': getRandomValue(1000, 1000000),
-        'type': getRandomElement(realtyTypes),
-        'rooms': getRandomValue(1, 5),
-        'guests': getRandomValue(1, 10),
-        'checkin': getRandomElement(checkinTimes),
-        'checkout': getRandomElement(checkoutTimes),
-        'features': getRandomLengthArray(features),
+        'price': window.utils.getRandomValue(1000, 1000000),
+        'type': window.utils.getRandomElement(realtyTypes),
+        'rooms': window.utils.getRandomValue(1, 5),
+        'guests': window.utils.getRandomValue(1, 10),
+        'checkin': window.utils.getRandomElement(checkinTimes),
+        'checkout': window.utils.getRandomElement(checkoutTimes),
+        'features': window.utils.getRandomLengthArray(features),
         'description': '',
         'photos': []
       },
 
       'location': {
-        'x': getRandomValue(300, 900),
-        'y': getRandomValue(100, 500)
+        'x': window.utils.getRandomValue(300, 900),
+        'y': window.utils.getRandomValue(100, 500)
       }
     };
 
     obj.offer.address = obj.location.x + ', ' + obj.location.y;
     return obj;
   };
-
-  function getRandomValue(min, max) {
-    return min + Math.floor(Math.random() * (max + 1 - min));
-  }
-
-  function getRandomElement(arr) {
-    return arr[getRandomValue(0, arr.length - 1)];
-  }
-
-  function getRandomLengthArray(arr) {
-    return arr.slice(0, getRandomValue(0, arr.length));
-  }
 })();

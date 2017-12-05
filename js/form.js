@@ -18,48 +18,60 @@
   });
 
   type.addEventListener('change', function (evt) {
-    onTypeChange(evt, priceInput);
+    priceInput.min = onTypeChange(evt.target.value);
   });
 
   roomNumber.addEventListener('change', function (evt) {
-    onRoomNumberChange(evt, capacity);
+    capacity.value = onRoomNumberChange(evt.target.value);
   });
 
   form.addEventListener('invalid', function (evt) {
     evt.target.style.outline = '3px solid red';
   }, true);
 
-  function onTimeChange(evt, t) {
-    t.value = evt.target.value;
+  function onTimeChange(evt, time) {
+    time.value = evt.target.value;
   }
 
-  function onTypeChange(evt, price) {
-    var flatMinPrice = 1000;
+  function onTypeChange(realtyType) {
     var bungaloMinPrice = 0;
+    var flatMinPrice = 1000;
     var houseMinPrice = 5000;
     var palaceMinPrice = 10000;
+    var minPrice;
 
-    switch (evt.target.value) {
+    switch (realtyType) {
       case 'flat':
-        price.min = flatMinPrice;
+        minPrice = flatMinPrice;
         break;
       case 'bungalo':
-        price.min = bungaloMinPrice;
+        minPrice = bungaloMinPrice;
         break;
       case 'house':
-        price.min = houseMinPrice;
+        minPrice = houseMinPrice;
         break;
       case 'palace':
-        price.min = palaceMinPrice;
+        minPrice = palaceMinPrice;
         break;
     }
+
+    return minPrice;   
   }
 
-  function onRoomNumberChange(evt, cap) {
-    if (evt.target.value === '100') {
-      cap.value = 0;
-    } else {
-      cap.value = evt.target.value;
+  function onRoomNumberChange(rooms) {
+    var roomsCapacity;
+
+    if (rooms === '100') {
+      roomsCapacity = 0;
+    } else if (rooms === '1'){
+      roomsCapacity = 1;
     }
+      else if (rooms === '2'){
+      roomsCapacity = 2;
+    } else {
+      roomsCapacity = 3;
+    }
+
+    return roomsCapacity;
   }
 })();

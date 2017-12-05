@@ -6,12 +6,12 @@
     var mapPins = map.querySelector('.map__pins');
 
     for (var i = 0; i < relatedAds.length; i++) {
-      var pinWidth = 46;
-      var pinHeight = 61;
+      var PIN_WIDTH = 46;
+      var PIN_HEIGHT = 61;
       var btn = document.createElement('button');
       var fragmentPin = document.createDocumentFragment();
-      btn.style.left = relatedAds[i].location.x - pinWidth / 2 + 'px';
-      btn.style.top = relatedAds[i].location.y - pinHeight + 'px';
+      btn.style.left = relatedAds[i].location.x - PIN_WIDTH / 2 + 'px';
+      btn.style.top = relatedAds[i].location.y - PIN_HEIGHT + 'px';
       btn.classList.add('map__pin');
       btn.classList.add('hidden');
 
