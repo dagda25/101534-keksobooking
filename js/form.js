@@ -8,7 +8,6 @@
   var priceInput = form.querySelector('input#price');
   var roomNumber = form.querySelector('select#room_number');
   var capacity = form.querySelector('select#capacity');
-  var address = form.querySelector('input#address');
 
   timeIn.addEventListener('change', function (evt) {
     onTimeChange(evt, timeOut);

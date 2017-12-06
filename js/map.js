@@ -64,7 +64,7 @@
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
-      
+
       var address = document.querySelector('input#address');
       var MAIN_PIN_WIDTH = 62;
       var MAIN_PIN_HEIGHT = 84;
@@ -75,7 +75,7 @@
       if (mapPinMain.offsetTop - shift.y + MAIN_PIN_HEIGHT < 250) {
         addressCoords.y = 250;
       } else if (mapPinMain.offsetTop - shift.y + MAIN_PIN_HEIGHT > 650) {
-        addressCoords.y = 650;        
+        addressCoords.y = 650;
       } else {
         addressCoords.y = mapPinMain.offsetTop - shift.y + MAIN_PIN_HEIGHT;
       }
