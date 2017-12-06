@@ -29,7 +29,7 @@
 
       'location': {
         'x': window.utils.getRandomValue(300, 900),
-        'y': window.utils.getRandomValue(100, 500)
+        'y': window.utils.getRandomValue(250, 650)
       }
     };
 

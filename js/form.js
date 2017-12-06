@@ -8,6 +8,7 @@
   var priceInput = form.querySelector('input#price');
   var roomNumber = form.querySelector('select#room_number');
   var capacity = form.querySelector('select#capacity');
+  var address = form.querySelector('input#address');
 
   timeIn.addEventListener('change', function (evt) {
     onTimeChange(evt, timeOut);
@@ -18,7 +19,7 @@
   });
 
   type.addEventListener('change', function (evt) {
-    priceInput.min = onTypeChange(evt.target.value);
+    priceInput.min = getMinPriceFromType(evt.target.value);
   });
 
   roomNumber.addEventListener('change', function (evt) {
@@ -33,7 +34,7 @@
     time.value = evt.target.value;
   }
 
-  function onTypeChange(realtyType) {
+  function getMinPriceFromType(realtyType) {
     var bungaloMinPrice = 0;
     var flatMinPrice = 1000;
     var houseMinPrice = 5000;
