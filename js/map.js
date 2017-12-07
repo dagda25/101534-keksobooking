@@ -70,7 +70,13 @@
       var MAIN_PIN_HEIGHT = 84;
       var addressCoords = {};
 
-      addressCoords.x = mapPinMain.offsetLeft - shift.x + MAIN_PIN_WIDTH / 2;
+      if (mapPinMain.offsetLeft - shift.x + MAIN_PIN_WIDTH / 2 < MAIN_PIN_WIDTH) {
+        addressCoords.x = MAIN_PIN_WIDTH;
+      } else if (mapPinMain.offsetLeft - shift.x + MAIN_PIN_WIDTH / 2 > 1200) {
+        addressCoords.x = 1200;
+      } else {
+        addressCoords.x = mapPinMain.offsetLeft - shift.x + MAIN_PIN_WIDTH / 2;
+      }
 
       if (mapPinMain.offsetTop - shift.y + MAIN_PIN_HEIGHT < 250) {
         addressCoords.y = 250;

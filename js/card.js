@@ -61,12 +61,11 @@
   }
 
   function getPluralEnding(number, firstForm, secondForm, thirdForm) {
-    var stringNumber = number.toString();
     if (number === 11 || number === 12 || number === 13 || number === 14) {
       return thirdForm;
-    } else if (stringNumber.slice(-1) === '1') {
+    } else if (number % 10 === 1) {
       return firstForm;
-    } else if (stringNumber.slice(-1) === '2' || stringNumber.slice(-1) === '3' || stringNumber.slice(-1) === '4') {
+    } else if (number % 10 === 2 || number % 10 === 3 || number % 10 === 4) {
       return secondForm;
     }
     return thirdForm;
