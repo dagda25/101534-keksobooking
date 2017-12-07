@@ -33,7 +33,7 @@
     type.innerText = getLocalName(relatedAd.offer.type);
 
     var rooms = element.children[0].children[6];
-    rooms.innerText = relatedAd.offer.rooms + ' ' + getPluralEnding(relatedAd.offer.rooms, 'комната', 'комнаты', 'комнат') + ' для ' + relatedAd.offer.guests + ' ' + getPluralEnding(relatedAd.offer.guests, 'гостя', 'гостей', 'гостей');
+    rooms.innerText = relatedAd.offer.rooms + ' ' + getPluralEnding(relatedAd.offer.rooms, ['комната', 'комнаты', 'комнат']) + ' для ' + relatedAd.offer.guests + ' ' + getPluralEnding(relatedAd.offer.guests, ['гостя', 'гостей', 'гостей']);
 
     var checkin = element.children[0].children[7];
     checkin.innerText = 'Заезд после ' + relatedAd.offer.checkin + ', выезд до ' + relatedAd.offer.checkout;
@@ -60,14 +60,14 @@
     return 'Бунгало';
   }
 
-  function getPluralEnding(number, firstForm, secondForm, thirdForm) {
-    if (number === 11 || number === 12 || number === 13 || number === 14) {
-      return thirdForm;
+  function getPluralEnding(number, forms) {
+    if ([11, 12, 13, 14].indexOf(number) !== -1) {
+      return forms[2];
     } else if (number % 10 === 1) {
-      return firstForm;
+      return forms[0];
     } else if (number % 10 === 2 || number % 10 === 3 || number % 10 === 4) {
-      return secondForm;
+      return forms[1];
     }
-    return thirdForm;
+    return forms[2];
   }
 })();
