@@ -18,7 +18,7 @@
   });
 
   type.addEventListener('change', function (evt) {
-    priceInput.min = onTypeChange(evt.target.value);
+    priceInput.min = getMinPriceFromType(evt.target.value);
   });
 
   roomNumber.addEventListener('change', function (evt) {
@@ -33,7 +33,7 @@
     time.value = evt.target.value;
   }
 
-  function onTypeChange(realtyType) {
+  function getMinPriceFromType(realtyType) {
     var bungaloMinPrice = 0;
     var flatMinPrice = 1000;
     var houseMinPrice = 5000;
