@@ -9,38 +9,30 @@
   var roomNumber = form.querySelector('select#room_number');
   var capacity = form.querySelector('select#capacity');
 
-  timeIn.addEventListener('change', function (evt) {
-    onTimeChange(evt, timeOut);
-  });
+  window.synchronizeFields ('change', timeIn, timeOut, onTimeChange);
 
-  timeOut.addEventListener('change', function (evt) {
-    onTimeChange(evt, timeIn);
-  });
+  window.synchronizeFields ('change', timeOut, timeIn, onTimeChange);
 
-  type.addEventListener('change', function (evt) {
-    priceInput.min = getMinPriceFromType(evt.target.value);
-  });
+  window.synchronizeFields ('change', type, priceInput, getMinPriceFromType);
 
-  roomNumber.addEventListener('change', function (evt) {
-    capacity.value = onRoomNumberChange(evt.target.value);
-  });
+  window.synchronizeFields ('change', roomNumber, capacity, onRoomNumberChange);
 
   form.addEventListener('invalid', function (evt) {
     evt.target.style.outline = '3px solid red';
   }, true);
 
-  function onTimeChange(evt, time) {
-    time.value = evt.target.value;
+  function onTimeChange(firstTime, secondTime) {
+     secondTime.value = firstTime.value;
   }
 
-  function getMinPriceFromType(realtyType) {
+  function getMinPriceFromType(firstField, secondField) {
     var bungaloMinPrice = 0;
     var flatMinPrice = 1000;
     var houseMinPrice = 5000;
     var palaceMinPrice = 10000;
-    var minPrice;
+    var minPrice = 0;
 
-    switch (realtyType) {
+    switch (firstField.value) {
       case 'flat':
         minPrice = flatMinPrice;
         break;
@@ -55,22 +47,22 @@
         break;
     }
 
-    return minPrice;
+    secondField.min = minPrice;
   }
 
-  function onRoomNumberChange(rooms) {
+  function onRoomNumberChange(firstField, secondField) {
     var roomsCapacity;
 
-    if (rooms === '100') {
+    if (firstField.value === '100') {
       roomsCapacity = 0;
-    } else if (rooms === '1') {
+    } else if (firstField.value === '1') {
       roomsCapacity = 1;
-    } else if (rooms === '2') {
+    } else if (firstField.value === '2') {
       roomsCapacity = 2;
     } else {
       roomsCapacity = 3;
     }
 
-    return roomsCapacity;
+    secondField.value = roomsCapacity;
   }
 })();
