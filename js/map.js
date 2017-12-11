@@ -126,7 +126,7 @@ function showMapPins(mapPins) {
 
 function closePopup(element, mapPins) {
   element.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
+  document.removeEventListener('keydown', window.onPopupEscPress);
 
   for (var j = 1; j < mapPins.length; j++) {
     mapPins[j].classList.remove('map__pin--active');
@@ -153,7 +153,7 @@ function onPopupCloseClick(evt, mapPins) {
   closePopup(evt.currentTarget.parentNode, mapPins);
 }
 
-window.onPopupEscPress = function(evt) {
+window.onPopupEscPress = function (evt) {
   var map = document.querySelector('.map');
   var mapPins = map.querySelectorAll('.map__pin');
   var popups = map.querySelectorAll('.popup');
@@ -166,4 +166,4 @@ window.onPopupEscPress = function(evt) {
     }
 
   }
-}
+};
