@@ -141,7 +141,7 @@ function onMapPinClick(evt, popups, mapPins) {
   for (var j = 1; j < mapPins.length; j++) {
     mapPins[j].classList.remove('map__pin--active');
     if (mapPins[j] === evt.currentTarget) {
-      showCard(popups[j - 1]);
+      window.showCard(popups[j - 1]);
     }
   }
 
@@ -153,7 +153,7 @@ function onPopupCloseClick(evt, mapPins) {
   closePopup(evt.currentTarget.parentNode, mapPins);
 }
 
-function onPopupEscPress(evt) {
+window.onPopupEscPress = function(evt) {
   var map = document.querySelector('.map');
   var mapPins = map.querySelectorAll('.map__pin');
   var popups = map.querySelectorAll('.popup');

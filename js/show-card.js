@@ -3,6 +3,6 @@
 (function () {
   window.showCard = function (card) {
     card.classList.remove('hidden');
-    document.addEventListener('keydown', onPopupEscPress);
+    document.addEventListener('keydown', window.onPopupEscPress);
   }
 })();

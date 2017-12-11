@@ -9,20 +9,20 @@
   var roomNumber = form.querySelector('select#room_number');
   var capacity = form.querySelector('select#capacity');
 
-  window.synchronizeFields ('change', timeIn, timeOut, onTimeChange);
+  window.synchronizeFields('change', timeIn, timeOut, onTimeChange);
 
-  window.synchronizeFields ('change', timeOut, timeIn, onTimeChange);
+  window.synchronizeFields('change', timeOut, timeIn, onTimeChange);
 
-  window.synchronizeFields ('change', type, priceInput, getMinPriceFromType);
+  window.synchronizeFields('change', type, priceInput, getMinPriceFromType);
 
-  window.synchronizeFields ('change', roomNumber, capacity, onRoomNumberChange);
+  window.synchronizeFields('change', roomNumber, capacity, onRoomNumberChange);
 
   form.addEventListener('invalid', function (evt) {
     evt.target.style.outline = '3px solid red';
   }, true);
 
   function onTimeChange(firstTime, secondTime) {
-     secondTime.value = firstTime.value;
+    secondTime.value = firstTime.value;
   }
 
   function getMinPriceFromType(firstField, secondField) {
