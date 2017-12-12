@@ -124,14 +124,9 @@ function showMapPins(mapPins) {
   }
 }
 
-function openPopup(element) {
-  element.classList.remove('hidden');
-  document.addEventListener('keydown', onPopupEscPress);
-}
-
 function closePopup(element, mapPins) {
   element.classList.add('hidden');
-  document.removeEventListener('keydown', onPopupEscPress);
+  document.removeEventListener('keydown', window.onPopupEscPress);
 
   for (var j = 1; j < mapPins.length; j++) {
     mapPins[j].classList.remove('map__pin--active');
@@ -146,7 +141,7 @@ function onMapPinClick(evt, popups, mapPins) {
   for (var j = 1; j < mapPins.length; j++) {
     mapPins[j].classList.remove('map__pin--active');
     if (mapPins[j] === evt.currentTarget) {
-      openPopup(popups[j - 1]);
+      window.showCard(popups[j - 1]);
     }
   }
 
@@ -158,7 +153,7 @@ function onPopupCloseClick(evt, mapPins) {
   closePopup(evt.currentTarget.parentNode, mapPins);
 }
 
-function onPopupEscPress(evt) {
+window.onPopupEscPress = function (evt) {
   var map = document.querySelector('.map');
   var mapPins = map.querySelectorAll('.map__pin');
   var popups = map.querySelectorAll('.popup');
@@ -171,4 +166,4 @@ function onPopupEscPress(evt) {
     }
 
   }
-}
+};
