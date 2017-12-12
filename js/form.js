@@ -27,5 +27,5 @@
 
   function syncValueWithMin(element, value) {
     element.min = value;
-  };
+  }
 })();
