@@ -22,7 +22,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; 
+    xhr.timeout = 10000;
 
     return xhr;
   };
@@ -44,19 +44,19 @@
   function onError(errorMessage) {
     var node = document.createElement('div');
     node.classList.add('error-message');
-    
+
     node.textContent = errorMessage;
 
     if (!errorMessage) {
       node.textContent = 'Произошла ошибка';
-    } 
+    }
 
     document.body.insertAdjacentElement('afterbegin', node);
 
-    setTimeout(function() {
+    setTimeout(function () {
       document.body.removeChild(node);
-    }, 2000)
-  } 
+    }, 2000);
+  }
 
   function onLoad(data) {
     window.createPins(data).appendChild(window.createAds(data));
@@ -77,23 +77,43 @@
         onPopupCloseClick(evt, mapPins);
       });
     }
-  } 
+  }
 
-  function onUpload(data) {
+  function onUpload() {
     var form = document.querySelector('.notice__form');
     var node = document.createElement('div');
 
     node.classList.add('success-message');
-    
-    node.innerHTML = 'Данные успешно отправлены'; 
+
+    node.innerHTML = 'Данные успешно отправлены';
     document.body.insertAdjacentElement('afterbegin', node);
 
     form.reset();
 
-    setTimeout(function() {
+    setTimeout(function () {
       document.body.removeChild(node);
-    }, 2000)
-  } 
+    }, 2000);
+  }
+
+  function onMapPinClick(evt, popups, mapPins) {
+    for (var i = 0; i < popups.length; i++) {
+      popups[i].classList.add('hidden');
+    }
+
+    for (var j = 1; j < mapPins.length; j++) {
+      mapPins[j].classList.remove('map__pin--active');
+      if (mapPins[j] === evt.currentTarget) {
+        window.showCard(popups[j - 1]);
+      }
+    }
+
+    evt.currentTarget.classList.add('map__pin--active');
+
+  }
+
+  function onPopupCloseClick(evt, mapPins) {
+    closePopup(evt.currentTarget.parentNode, mapPins);
+  }
 
   window.backend = {
     load: load,

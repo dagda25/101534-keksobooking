@@ -3,7 +3,6 @@
 (function () {
   window.createAds = function (data) {
     var fragmentAd = document.createDocumentFragment();
-    var map = document.querySelector('.map');
 
     for (var i = 0; i < data.length; i++) {
       fragmentAd.appendChild(createSingleAd(data[i]));

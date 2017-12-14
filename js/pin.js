@@ -38,5 +38,25 @@
     });
 
     return map;
+  };
+
+  function activateMap(map) {
+    map.classList.remove('map--faded');
+  }
+
+  function activateForm(form) {
+    var fieldset = form.querySelectorAll('fieldset');
+
+    form.classList.remove('notice__form--disabled');
+
+    for (var i = 0; i < fieldset.length; i++) {
+      fieldset[i].disabled = false;
+    }
+  }
+
+  function showMapPins(mapPins) {
+    for (var i = 1; i < mapPins.length; i++) {
+      mapPins[i].classList.remove('hidden');
+    }
   }
 })();
