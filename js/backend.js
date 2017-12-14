@@ -3,23 +3,23 @@
 (function () {
   var SERVER_URL = 'https://1510.dump.academy/keksobooking';
 
-  var setup = function (onLoad, onError) {
+  var setup = function (onSuccess, onFailure) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
       if (xhr.status === 200) {
-        onLoad(xhr.response);
+        onSuccess(xhr.response);
       } else {
-        onError(xhr.response);
+        onFailure(xhr.response);
       }
     });
 
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
+      onFailure('Произошла ошибка соединения');
     });
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      onFailure('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
     xhr.timeout = 10000;
@@ -27,14 +27,14 @@
     return xhr;
   };
 
-  function load(onLoad, onError) {
+  function load(onSuccess, onFailure) {
     var xhr = setup(onLoad, onError);
 
     xhr.open('GET', SERVER_URL + '/data');
     xhr.send();
   }
 
-  function save(data, onUpload, onError) {
+  function save(data, onSuccess, onFailure) {
     var xhr = setup(onUpload, onError);
 
     xhr.open('POST', SERVER_URL);
@@ -112,7 +112,7 @@
   }
 
   function onPopupCloseClick(evt, mapPins) {
-    closePopup(evt.currentTarget.parentNode, mapPins);
+    window.utils.closePopup(evt.currentTarget.parentNode, mapPins);
   }
 
   window.backend = {
@@ -121,5 +121,5 @@
     onLoad: onLoad,
     onError: onError,
     onUpload: onUpload
-  } 
+  };
 })();

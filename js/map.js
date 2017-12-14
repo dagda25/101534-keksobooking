@@ -66,15 +66,6 @@
   });
 })();
 
-function closePopup(element, mapPins) {
-  element.classList.add('hidden');
-  document.removeEventListener('keydown', window.onPopupEscPress);
-
-  for (var j = 1; j < mapPins.length; j++) {
-    mapPins[j].classList.remove('map__pin--active');
-  }
-}
-
 window.onPopupEscPress = function (evt) {
   var map = document.querySelector('.map');
   var mapPins = map.querySelectorAll('.map__pin');
@@ -84,7 +75,7 @@ window.onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
 
     for (var j = 0; j < popups.length; j++) {
-      closePopup(popups[j], mapPins);
+      window.utils.closePopup(popups[j], mapPins);
     }
 
   }
