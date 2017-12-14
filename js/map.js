@@ -3,46 +3,10 @@
 (function () {
   var ENTER_KEYCODE = 13;
 
-  var relatedAds = [];
+  window.backend.load(window.backend.onLoad, window.backend.onError);
+
   var map = document.querySelector('.map');
   var mapPinMain = map.querySelector('.map__pin--main');
-  var form = document.querySelector('.notice__form');
-
-  for (var i = 0; i < 8; i++) {
-    relatedAds[i] = window.getRelatedAd(i);
-  }
-
-  window.createPins(relatedAds).appendChild(window.createAds(relatedAds));
-
-  var mapPins = map.querySelectorAll('.map__pin');
-  var popups = map.querySelectorAll('.popup');
-  var popupClose = map.querySelectorAll('.popup__close');
-
-  for (i = 1; i < mapPins.length; i++) {
-    mapPins[i].addEventListener('click', function (evt) {
-      onMapPinClick(evt, popups, mapPins);
-    });
-  }
-
-  for (i = 0; i < popupClose.length; i++) {
-    popupClose[i].addEventListener('click', function (evt) {
-      onPopupCloseClick(evt, mapPins);
-    });
-  }
-
-  mapPinMain.addEventListener('mouseup', function () {
-    activateMap(map);
-    activateForm(form);
-    showMapPins(mapPins);
-  });
-
-  mapPinMain.addEventListener('keyup', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
-      activateMap(map);
-      activateForm(form);
-      showMapPins(mapPins);
-    }
-  });
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();

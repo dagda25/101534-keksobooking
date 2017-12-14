@@ -21,6 +21,13 @@
     evt.target.style.outline = '3px solid red';
   }, true);
 
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var formData = new FormData(form);
+
+    window.backend.save(formData, window.backend.onUpload, window.backend.onError);
+  });
+
   function syncValues(element, value) {
     element.value = value;
   }

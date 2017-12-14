@@ -1,4 +1,4 @@
-body
+﻿body
 {
     font-family: Roboto, Arial, sans-serif;
     font-size: 16px;
@@ -847,3 +847,5 @@ textarea:focus
 {
     background-position: -10px -10px;
 }
+.error-message{    z-index: 100;  text-align: center; background-color:#f7b7af; position:fixed; width: 300px; top: 80px; left: 50%; margin-left: -190px; font-size: 24px; padding: 40px; border-radius: 20px; border:2px solid black;}
+.success-message{    z-index: 100;  text-align: center; background-color: #d2fcc7; position:fixed; width: 300px; top: 80px; left: 50%; margin-left: -190px; font-size: 24px; padding: 40px; border-radius: 20px; border:2px solid black;}
