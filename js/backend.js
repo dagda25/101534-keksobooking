@@ -28,14 +28,14 @@
   };
 
   function load(onSuccess, onFailure) {
-    var xhr = setup(onSuccess, onError);
+    var xhr = setup(onSuccess, onFailure);
 
     xhr.open('GET', SERVER_URL + '/data');
     xhr.send();
   }
 
   function save(data, onSuccess, onFailure) {
-    var xhr = setup(onSuccess, onError);
+    var xhr = setup(onSuccess, onFailure);
 
     xhr.open('POST', SERVER_URL);
     xhr.send(data);
