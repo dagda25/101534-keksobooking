@@ -8,7 +8,7 @@
   var MAIN_PIN_WIDTH = 62;
   var MAIN_PIN_HEIGHT = 84;
   var MAP_WIDTH = 1200;
-  var MAP_HEIGHT = 750;  
+  var MAP_HEIGHT = 750;
   var address = document.querySelector('input#address');
   var addressCoords = {};
 
@@ -38,7 +38,7 @@
       };
 
       if (mapPinMain.offsetLeft - shift.x + MAIN_PIN_WIDTH / 2 < MAIN_PIN_WIDTH) {
-        addressCoords.x =  MAIN_PIN_WIDTH / 2;
+        addressCoords.x = MAIN_PIN_WIDTH / 2;
       } else if (mapPinMain.offsetLeft - shift.x + MAIN_PIN_WIDTH / 2 > 1200) {
         addressCoords.x = 1200 - MAIN_PIN_WIDTH / 2;
       } else {
@@ -73,7 +73,6 @@
   function onLoad(data) {
     window.createPins(data).appendChild(window.createAds(data));
 
-    var map = document.querySelector('.map');
     var mapPins = map.querySelectorAll('.map__pin');
     var popups = map.querySelectorAll('.popup');
     var popupClose = map.querySelectorAll('.popup__close');
@@ -108,8 +107,7 @@
     }, 2000);
   }
 
-  function onPopupEscPress (evt) {
-    var map = document.querySelector('.map');
+  function onPopupEscPress(evt) {
     var mapPins = map.querySelectorAll('.map__pin');
     var popups = map.querySelectorAll('.popup');
     var ESC_KEYCODE = 27;
@@ -121,7 +119,7 @@
       }
 
     }
-  };
+  }
 
   function onMapPinClick(evt, popups, mapPins) {
     for (var i = 0; i < popups.length; i++) {
@@ -142,7 +140,7 @@
     window.map.closePopup(evt.currentTarget.parentNode, mapPins);
   }
 
-  function closePopup (element, mapPins) {
+  function closePopup(element, mapPins) {
     element.classList.add('hidden');
     document.removeEventListener('keydown', window.map.onPopupEscPress);
 

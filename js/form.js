@@ -37,7 +37,6 @@
   }
 
   function onUpload() {
-    var form = document.querySelector('.notice__form');
     var node = document.createElement('div');
 
     node.classList.add('success-message');
