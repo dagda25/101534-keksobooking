@@ -25,7 +25,7 @@
     evt.preventDefault();
     var formData = new FormData(form);
 
-    window.backend.save(formData, window.backend.onUpload, window.backend.onError);
+    window.backend.save(formData, onUpload, window.map.onError);
   });
 
   function syncValues(element, value) {
@@ -34,5 +34,21 @@
 
   function syncValueWithMin(element, value) {
     element.min = value;
+  }
+
+  function onUpload() {
+    var form = document.querySelector('.notice__form');
+    var node = document.createElement('div');
+
+    node.classList.add('success-message');
+
+    node.innerHTML = 'Данные успешно отправлены';
+    document.body.insertAdjacentElement('afterbegin', node);
+
+    form.reset();
+
+    setTimeout(function () {
+      document.body.removeChild(node);
+    }, 2000);
   }
 })();
