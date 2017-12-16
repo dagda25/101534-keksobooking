@@ -21,11 +21,33 @@
     evt.target.style.outline = '3px solid red';
   }, true);
 
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var formData = new FormData(form);
+
+    window.backend.save(formData, onUpload, window.map.onError);
+  });
+
   function syncValues(element, value) {
     element.value = value;
   }
 
   function syncValueWithMin(element, value) {
     element.min = value;
+  }
+
+  function onUpload() {
+    var node = document.createElement('div');
+
+    node.classList.add('success-message');
+
+    node.innerHTML = 'Данные успешно отправлены';
+    document.body.insertAdjacentElement('afterbegin', node);
+
+    form.reset();
+
+    setTimeout(function () {
+      document.body.removeChild(node);
+    }, 2000);
   }
 })();
