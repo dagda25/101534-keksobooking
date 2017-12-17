@@ -12,6 +12,6 @@
 
     getRandomLengthArray: function (arr) {
       return arr.slice(0, window.utils.getRandomValue(0, arr.length));
-    }
+    },
   };
 })();
