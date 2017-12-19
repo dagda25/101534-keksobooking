@@ -39,34 +39,33 @@
     checkin.innerText = 'Заезд после ' + dataElement.offer.checkin + ', выезд до ' + dataElement.offer.checkout;
 
     var featuresBlock = element.children[0].children[8];
-    var numberOfFeatures = dataElement.offer.features.length;
 
     for (var i = 0; i < featuresBlock.children.length; i++) {
       featuresBlock.children[i].classList.add('hidden');
-    }    
+    } 
 
-    dataElement.offer.features.forEach(function(item) {
+    dataElement.offer.features.forEach(function (item) {
       switch (item) {
-        case 'wifi': 
+        case 'wifi':
           featuresBlock.children[0].classList.remove('hidden');
           break;
-        case 'dishwasher': 
+        case 'dishwasher':
           featuresBlock.children[1].classList.remove('hidden');
           break;
-        case 'parking': 
+        case 'parking':
           featuresBlock.children[2].classList.remove('hidden');
           break;
-        case 'washer': 
+        case 'washer':
           featuresBlock.children[3].classList.remove('hidden');
           break;
-        case 'elevator': 
+        case 'elevator':
           featuresBlock.children[4].classList.remove('hidden');
           break;
-        case 'conditioner': 
+        case 'conditioner':
           featuresBlock.children[5].classList.remove('hidden');
-          break;                                              
+          break;                                            
       }
-    })
+    });
 
     var description = element.children[0].children[9];
     description.innerText = dataElement.offer.description;
