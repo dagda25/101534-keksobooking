@@ -5,13 +5,13 @@
     var fragmentAd = document.createDocumentFragment();
 
     for (var i = 0; i < data.length; i++) {
-      fragmentAd.appendChild(createSingleAd(data[i]));
+      fragmentAd.appendChild(createAd(data[i]));
     }
 
     return fragmentAd;
   };
 
-  function createSingleAd(dataElement) {
+  function createAd(dataElement) {
     var template = document.querySelector('template');
     var element = template.content.cloneNode(true);
     element.removeChild(element.children[1]);
@@ -41,9 +41,32 @@
     var featuresBlock = element.children[0].children[8];
     var numberOfFeatures = dataElement.offer.features.length;
 
-    for (var i = numberOfFeatures; i < featuresBlock.children.length;) {
-      featuresBlock.removeChild(featuresBlock.children[i]);
-    }
+    for (var i = 0; i < featuresBlock.children.length; i++) {
+      featuresBlock.children[i].classList.add('hidden');
+    }    
+
+    dataElement.offer.features.forEach(function(item) {
+      switch (item) {
+        case 'wifi': 
+          featuresBlock.children[0].classList.remove('hidden');
+          break;
+        case 'dishwasher': 
+          featuresBlock.children[1].classList.remove('hidden');
+          break;
+        case 'parking': 
+          featuresBlock.children[2].classList.remove('hidden');
+          break;
+        case 'washer': 
+          featuresBlock.children[3].classList.remove('hidden');
+          break;
+        case 'elevator': 
+          featuresBlock.children[4].classList.remove('hidden');
+          break;
+        case 'conditioner': 
+          featuresBlock.children[5].classList.remove('hidden');
+          break;                                              
+      }
+    })
 
     var description = element.children[0].children[9];
     description.innerText = dataElement.offer.description;

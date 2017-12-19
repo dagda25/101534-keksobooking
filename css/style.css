@@ -96,11 +96,6 @@ textarea:focus
     box-shadow: 0 0 4px 1px #ff6547;
 }
 
-.hidden
-{
-    display: none;
-}
-
 .visuallyhidden
 {
     position: absolute;
@@ -877,4 +872,9 @@ textarea:focus
     padding: 40px; 
     border-radius: 20px; 
     border:2px solid black;
+}
+
+.hidden
+{
+    display: none;
 }
