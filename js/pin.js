@@ -211,5 +211,6 @@
     for (var i = 1; i < mapPins.length; i++) {
       mapPins[i].classList.remove('hidden');
     }
-  }
+  };
+
 })();

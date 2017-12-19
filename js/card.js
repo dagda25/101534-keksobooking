@@ -42,7 +42,7 @@
 
     for (var i = 0; i < featuresBlock.children.length; i++) {
       featuresBlock.children[i].classList.add('hidden');
-    } 
+    }
 
     dataElement.offer.features.forEach(function (item) {
       switch (item) {
@@ -63,7 +63,7 @@
           break;
         case 'conditioner':
           featuresBlock.children[5].classList.remove('hidden');
-          break;                                            
+          break;                                        
       }
     });
 
