@@ -5,7 +5,6 @@
     var map = document.querySelector('.map');
     var mapPinsArea = map.querySelector('.map__pins');
     var mapPinMain = map.querySelector('.map__pin--main');
-    var popups = map.querySelectorAll('.popup');
     var form = document.querySelector('.notice__form');
     var mapFilters = map.querySelector('.map__filters');
     var typesFilter = map.querySelector('#housing-type');
@@ -48,7 +47,7 @@
       activateMap(map);
       activateForm(form);
       showMapPins(mapPins);
-      reducePinsToFive(mapPins);  
+      reducePinsToFive(mapPins);
     };
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
@@ -62,7 +61,7 @@
         element.classList.add('hidden');
       });
 
-      filterByType(mapPins, typesFilter.value);                 
+      filterByType(mapPins, typesFilter.value);
       filterByPrice(mapPins, priceFilter.value);
       filterByRooms(mapPins, roomsFilter.value);
       filterByGuests(mapPins, guestsFilter.value);
@@ -135,7 +134,7 @@
           if (element.features.indexOf('dishwasher') === -1) {
             element.classList.add('hidden');
           }
-        }); 
+        });
       }
 
       if (featuresFilter.children[4].checked === true) {
@@ -159,7 +158,7 @@
           if (element.features.indexOf('elevator') === -1) {
             element.classList.add('hidden');
           }
-        });      
+        });
       }
 
       if (featuresFilter.children[10].checked === true) {
@@ -167,7 +166,7 @@
           if (element.features.indexOf('conditioner') === -1) {
             element.classList.add('hidden');
           }
-        });      
+        });
       }
 
     }
