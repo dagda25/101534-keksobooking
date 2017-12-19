@@ -48,13 +48,13 @@
       activateMap(map);
       activateForm(form);
       showMapPins(mapPins);
-      reducePinsToFive(mapPins);    
+      reducePinsToFive(mapPins);  
     };
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
 
     mapFilters.addEventListener('change', function () {
-      window.debounce(onFilterChange); 
+      window.debounce(onFilterChange);
     });
 
     function onFilterChange() {
@@ -62,7 +62,7 @@
         element.classList.add('hidden');
       });
 
-      filterByType(mapPins, typesFilter.value);                     
+      filterByType(mapPins, typesFilter.value);                 
       filterByPrice(mapPins, priceFilter.value);
       filterByRooms(mapPins, roomsFilter.value);
       filterByGuests(mapPins, guestsFilter.value);
@@ -135,9 +135,9 @@
           if (element.features.indexOf('dishwasher') === -1) {
             element.classList.add('hidden');
           }
-        });   
+        }); 
       }
-      
+
       if (featuresFilter.children[4].checked === true) {
         [].forEach.call(elements, function (element) {
           if (element.features.indexOf('parking') === -1) {
@@ -145,29 +145,29 @@
           }
         });
       }
-    
+
       if (featuresFilter.children[6].checked === true) {
         [].forEach.call(elements, function (element) {
           if (element.features.indexOf('washer') === -1) {
             element.classList.add('hidden');
-          };
-        })        
+          }
+        });
       }
-      
+
       if (featuresFilter.children[8].checked === true) {
         [].forEach.call(elements, function (element) {
           if (element.features.indexOf('elevator') === -1) {
             element.classList.add('hidden');
-          };
-        })        
+          }
+        });      
       }
-      
+
       if (featuresFilter.children[10].checked === true) {
         [].forEach.call(elements, function (element) {
           if (element.features.indexOf('conditioner') === -1) {
             element.classList.add('hidden');
-          };
-        });       
+          }
+        });      
       }
 
     }
