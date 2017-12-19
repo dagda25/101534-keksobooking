@@ -212,5 +212,5 @@
       mapPins[i].classList.remove('hidden');
     }
   };
-
+};
 })();
