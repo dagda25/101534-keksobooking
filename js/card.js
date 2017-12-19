@@ -64,7 +64,7 @@
         case 'conditioner':
           featuresBlock.children[5].classList.remove('hidden');
           break;
-        }
+      }
     });
 
     var description = element.children[0].children[9];

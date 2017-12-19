@@ -12,7 +12,7 @@
     var priceFilter = map.querySelector('#housing-price');
     var roomsFilter = map.querySelector('#housing-rooms');
     var guestsFilter = map.querySelector('#housing-guests');
-    var featuresFilter = map.querySelector('#housing-features');  
+    var featuresFilter = map.querySelector('#housing-features');
     mapPinMain.features = [];
 
     for (var i = 0; i < data.length; i++) {
@@ -29,7 +29,7 @@
       btn.rooms = data[i].offer.rooms;
       btn.guests = data[i].offer.guests;
       btn.features = data[i].offer.features;
-  
+
       var img = document.createElement('img');
       img.src = data[i].author.avatar;
       img.width = 40;
@@ -44,25 +44,25 @@
 
     var mapPins = map.querySelectorAll('.map__pin');
 
-    var onMouseUpActivate = function() {
+    var onMouseUpActivate = function () {
       activateMap(map);
       activateForm(form);
       showMapPins(mapPins);
-      reducePinsToFive(mapPins);      
-    }
+      reducePinsToFive(mapPins);    
+    };
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
 
-    mapFilters.addEventListener('change', function(evt) {
-      window.debounce(onFilterChange);     
+    mapFilters.addEventListener('change', function () {
+      window.debounce(onFilterChange); 
     });
 
-    function onFilterChange(evt) {
-      [].forEach.call(mapPins, function(element) {
+    function onFilterChange() {
+      [].forEach.call(mapPins, function (element) {
         element.classList.add('hidden');
       });
 
-      filterByType(mapPins, typesFilter.value);                           
+      filterByType(mapPins, typesFilter.value);                     
       filterByPrice(mapPins, priceFilter.value);
       filterByRooms(mapPins, roomsFilter.value);
       filterByGuests(mapPins, guestsFilter.value);
@@ -75,13 +75,13 @@
 
     function reducePinsToFive(elements) {
       var counter = 0;
-      for (var i = 1; i < elements.length; i++) {
+      for (var j = 1; j < elements.length; j++) {
         if (counter === 5) {
-          elements[i].classList.add('hidden');
+          elements[j].classList.add('hidden');
           continue;
         }
 
-        if (!elements[i].classList.contains('hidden')) {
+        if (!elements[j].classList.contains('hidden')) {
           counter++;
         }
       }
@@ -89,108 +89,108 @@
 
     function filterByType(elements, value) {
       if (value === 'any') {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           element.classList.remove('hidden');
-        })
+        });
       } else {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.realtyType === value) {
             element.classList.remove('hidden');
           }
-        })
+        });
       }
     }
 
     function filterByRooms(elements, value) {
       if (value !== 'any') {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.rooms !== +value) {
             element.classList.add('hidden');
           }
-        })
+        });
       }
     }
 
     function filterByGuests(elements, value) {
       if (value !== 'any') {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.guests !== +value) {
             element.classList.add('hidden');
           }
-        })
+        });
       }
     }
 
     function filterByFeatures(elements) {
       if (featuresFilter.children[0].checked === true) {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.features.indexOf('wifi') === -1) {
             element.classList.add('hidden');
           }
-        })        
+        });
       }
 
       if (featuresFilter.children[2].checked === true) {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.features.indexOf('dishwasher') === -1) {
             element.classList.add('hidden');
           }
-        })        
+        });   
       }
       
       if (featuresFilter.children[4].checked === true) {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.features.indexOf('parking') === -1) {
             element.classList.add('hidden');
           }
-        })        
+        });
       }
     
       if (featuresFilter.children[6].checked === true) {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.features.indexOf('washer') === -1) {
             element.classList.add('hidden');
-          }
+          };
         })        
       }
       
       if (featuresFilter.children[8].checked === true) {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.features.indexOf('elevator') === -1) {
             element.classList.add('hidden');
-          }
+          };
         })        
       }
       
       if (featuresFilter.children[10].checked === true) {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.features.indexOf('conditioner') === -1) {
             element.classList.add('hidden');
-          }
-        })        
+          };
+        });       
       }
 
     }
 
-    function filterByPrice(elements, value) { 
+    function filterByPrice(elements, value) {
       if (value === 'low') {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.price >= 10000) {
             element.classList.add('hidden');
           }
-        })
+        });
       } else if (value === 'middle') {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.price < 10000 || element.price >= 50000) {
             element.classList.add('hidden');
           }
-        })
+        });
       } else if (value === 'high') {
-        [].forEach.call(elements, function(element) {
+        [].forEach.call(elements, function (element) {
           if (element.price < 50000) {
             element.classList.add('hidden');
           }
-        })
+        });
       }
     }
 
@@ -215,6 +215,6 @@
     for (var i = 1; i < mapPins.length; i++) {
       mapPins[i].classList.remove('hidden');
     }
-  };
+  }
 
 })();
