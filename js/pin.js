@@ -87,10 +87,11 @@
     }
 
     function filterByType(elements, value) {
-      var visibleElements = elements.filter(function(element) {
+      var visibleElements = elements.filter(function (element) {
         if (value === 'any' || element.realtyType === value) {
-          return element;
-        }  
+          return true;
+        }
+        return false;
       });
 
       visibleElements.forEach(function (element) {
@@ -99,10 +100,11 @@
     }
 
     function filterByRooms(elements, value) {
-      var hiddenElements = elements.filter(function(element) {
+      var hiddenElements = elements.filter(function (element) {
         if (value !== 'any' && element.rooms !== +value) {
-          return element;
-        }  
+          return true;
+        }
+        return false;
       });
 
       hiddenElements.forEach(function (element) {
@@ -111,10 +113,11 @@
     }
 
     function filterByGuests(elements, value) {
-      var hiddenElements = elements.filter(function(element) {
+      var hiddenElements = elements.filter(function (element) {
         if (value !== 'any' && element.guests !== +value) {
-          return element;
-        }  
+          return true;
+        }
+        return false;
       });
 
       hiddenElements.forEach(function (element) {
@@ -175,17 +178,17 @@
 
     function filterByPrice(elements, value) {
       elements.forEach(function (element) {
-        if (value === 'low'  && element.price >= 10000) {
+        if (value === 'low' && element.price >= 10000) {
           element.classList.add('hidden');
         }
 
-        if (value === 'middle'  && (element.price < 10000 || element.price >= 50000)) {
+        if (value === 'middle' && (element.price < 10000 || element.price >= 50000)) {
           element.classList.add('hidden');
         }
 
-        if (value === 'high'  && element.price < 50000) {
+        if (value === 'high' && element.price < 50000) {
           element.classList.add('hidden');
-        }        
+        }    
       });
     }
 
