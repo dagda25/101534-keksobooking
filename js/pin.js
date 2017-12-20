@@ -188,7 +188,7 @@
 
         if (value === 'high' && element.price < 50000) {
           element.classList.add('hidden');
-        }    
+        }
       });
     }
 
