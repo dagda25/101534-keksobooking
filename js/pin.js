@@ -41,7 +41,7 @@
       mapPinsArea.appendChild(fragmentPin);
     }
 
-    var mapPins = map.querySelectorAll('.map__pin');
+    var mapPins = Array.from(map.querySelectorAll('.map__pin'));
 
     var onMouseUpActivate = function () {
       activateMap(map);
@@ -57,7 +57,7 @@
     });
 
     function onFilterChange() {
-      [].forEach.call(mapPins, function (element) {
+      mapPins.forEach(function (element) {
         element.classList.add('hidden');
       });
 
@@ -87,42 +87,44 @@
     }
 
     function filterByType(elements, value) {
-      if (value === 'any') {
-        [].forEach.call(elements, function (element) {
-          element.classList.remove('hidden');
-        });
-      } else {
-        [].forEach.call(elements, function (element) {
-          if (element.realtyType === value) {
-            element.classList.remove('hidden');
-          }
-        });
-      }
+      var visibleElements = elements.filter(function(element) {
+        if (value === 'any' || element.realtyType === value) {
+          return element;
+        }  
+      });
+
+      visibleElements.forEach(function (element) {
+        element.classList.remove('hidden');
+      });
     }
 
     function filterByRooms(elements, value) {
-      if (value !== 'any') {
-        [].forEach.call(elements, function (element) {
-          if (element.rooms !== +value) {
-            element.classList.add('hidden');
-          }
-        });
-      }
+      var hiddenElements = elements.filter(function(element) {
+        if (value !== 'any' && element.rooms !== +value) {
+          return element;
+        }  
+      });
+
+      hiddenElements.forEach(function (element) {
+        element.classList.add('hidden');
+      });
     }
 
     function filterByGuests(elements, value) {
-      if (value !== 'any') {
-        [].forEach.call(elements, function (element) {
-          if (element.guests !== +value) {
-            element.classList.add('hidden');
-          }
-        });
-      }
+      var hiddenElements = elements.filter(function(element) {
+        if (value !== 'any' && element.guests !== +value) {
+          return element;
+        }  
+      });
+
+      hiddenElements.forEach(function (element) {
+        element.classList.add('hidden');
+      });
     }
 
     function filterByFeatures(elements) {
       if (featuresFilter.children[0].checked === true) {
-        [].forEach.call(elements, function (element) {
+        elements.forEach(function (element) {
           if (element.features.indexOf('wifi') === -1) {
             element.classList.add('hidden');
           }
@@ -130,7 +132,7 @@
       }
 
       if (featuresFilter.children[2].checked === true) {
-        [].forEach.call(elements, function (element) {
+        elements.forEach(function (element) {
           if (element.features.indexOf('dishwasher') === -1) {
             element.classList.add('hidden');
           }
@@ -138,7 +140,7 @@
       }
 
       if (featuresFilter.children[4].checked === true) {
-        [].forEach.call(elements, function (element) {
+        elements.forEach(function (element) {
           if (element.features.indexOf('parking') === -1) {
             element.classList.add('hidden');
           }
@@ -146,7 +148,7 @@
       }
 
       if (featuresFilter.children[6].checked === true) {
-        [].forEach.call(elements, function (element) {
+        elements.forEach(function (element) {
           if (element.features.indexOf('washer') === -1) {
             element.classList.add('hidden');
           }
@@ -154,7 +156,7 @@
       }
 
       if (featuresFilter.children[8].checked === true) {
-        [].forEach.call(elements, function (element) {
+        elements.forEach(function (element) {
           if (element.features.indexOf('elevator') === -1) {
             element.classList.add('hidden');
           }
@@ -162,7 +164,7 @@
       }
 
       if (featuresFilter.children[10].checked === true) {
-        [].forEach.call(elements, function (element) {
+        elements.forEach(function (element) {
           if (element.features.indexOf('conditioner') === -1) {
             element.classList.add('hidden');
           }
@@ -172,25 +174,19 @@
     }
 
     function filterByPrice(elements, value) {
-      if (value === 'low') {
-        [].forEach.call(elements, function (element) {
-          if (element.price >= 10000) {
-            element.classList.add('hidden');
-          }
-        });
-      } else if (value === 'middle') {
-        [].forEach.call(elements, function (element) {
-          if (element.price < 10000 || element.price >= 50000) {
-            element.classList.add('hidden');
-          }
-        });
-      } else if (value === 'high') {
-        [].forEach.call(elements, function (element) {
-          if (element.price < 50000) {
-            element.classList.add('hidden');
-          }
-        });
-      }
+      elements.forEach(function (element) {
+        if (value === 'low'  && element.price >= 10000) {
+          element.classList.add('hidden');
+        }
+
+        if (value === 'middle'  && (element.price < 10000 || element.price >= 50000)) {
+          element.classList.add('hidden');
+        }
+
+        if (value === 'high'  && element.price < 50000) {
+          element.classList.add('hidden');
+        }        
+      });
     }
 
     return map;
