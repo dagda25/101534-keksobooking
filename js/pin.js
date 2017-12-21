@@ -47,7 +47,16 @@
       activateMap(map);
       activateForm(form);
       showMapPins(mapPins);
-      reducePinsToFive(mapPins);
+
+      mapPins.forEach(function (element) {
+        element.classList.add('hidden');
+      });
+
+      mapPins = reducePinsToFive(mapPins);
+
+      mapPins.forEach(function (element) {
+        element.classList.remove('hidden');
+      });      
     };
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
@@ -57,138 +66,65 @@
     });
 
     function onFilterChange() {
+      mapPins = Array.from(map.querySelectorAll('.map__pin'));
       mapPins.forEach(function (element) {
         element.classList.add('hidden');
       });
 
-      filterByType(mapPins, typesFilter.value);
-      filterByPrice(mapPins, priceFilter.value);
-      filterByRooms(mapPins, roomsFilter.value);
-      filterByGuests(mapPins, guestsFilter.value);
-      filterByFeatures(mapPins);
-      reducePinsToFive(mapPins);
+      mapPins = filterByType(mapPins, typesFilter.value);
+      mapPins = filterByPrice(mapPins, priceFilter.value);
+      mapPins = filterByRooms(mapPins, roomsFilter.value);
+      mapPins = filterByGuests(mapPins, guestsFilter.value);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[0]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[2]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[4]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[6]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[8]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[10]);
+      mapPins = reducePinsToFive(mapPins);
+
+      mapPins.forEach(function (element) {
+        element.classList.remove('hidden');
+      });
 
       mapPinMain.classList.remove('hidden');
       mapPinMain.removeEventListener('mouseup', onMouseUpActivate);
     }
 
     function reducePinsToFive(elements) {
-      var counter = 0;
-      for (var j = 1; j < elements.length; j++) {
-        if (counter === 5) {
-          elements[j].classList.add('hidden');
-          continue;
-        }
-
-        if (!elements[j].classList.contains('hidden')) {
-          counter++;
-        }
-      }
+      return elements.slice(0, 6);
     }
 
     function filterByType(elements, value) {
-      var visibleElements = elements.filter(function (element) {
-        if (value === 'any' || element.realtyType === value) {
-          return true;
-        }
-        return false;
-      });
-
-      visibleElements.forEach(function (element) {
-        element.classList.remove('hidden');
+      return elements.filter(function (element) {
+        return (value === 'any' || element.realtyType === value); 
       });
     }
 
     function filterByRooms(elements, value) {
-      var hiddenElements = elements.filter(function (element) {
-        if (value !== 'any' && element.rooms !== +value) {
-          return true;
-        }
-        return false;
-      });
-
-      hiddenElements.forEach(function (element) {
-        element.classList.add('hidden');
+      return elements.filter(function (element) {
+        return (value === 'any' || element.rooms === parseInt(value)); 
       });
     }
 
     function filterByGuests(elements, value) {
-      var hiddenElements = elements.filter(function (element) {
-        if (value !== 'any' && element.guests !== +value) {
-          return true;
-        }
-        return false;
-      });
-
-      hiddenElements.forEach(function (element) {
-        element.classList.add('hidden');
+      return elements.filter(function (element) {
+        return (value === 'any' || element.guests === parseInt(value)); 
       });
     }
 
-    function filterByFeatures(elements) {
-      if (featuresFilter.children[0].checked === true) {
-        elements.forEach(function (element) {
-          if (element.features.indexOf('wifi') === -1) {
-            element.classList.add('hidden');
-          }
-        });
+    function filterByFeatures(elements, field) {
+      if (field.checked === true) {
+        return elements.filter(function (element) {
+          return (element.features.indexOf(field.value) !== -1); 
+        });       
       }
-
-      if (featuresFilter.children[2].checked === true) {
-        elements.forEach(function (element) {
-          if (element.features.indexOf('dishwasher') === -1) {
-            element.classList.add('hidden');
-          }
-        });
-      }
-
-      if (featuresFilter.children[4].checked === true) {
-        elements.forEach(function (element) {
-          if (element.features.indexOf('parking') === -1) {
-            element.classList.add('hidden');
-          }
-        });
-      }
-
-      if (featuresFilter.children[6].checked === true) {
-        elements.forEach(function (element) {
-          if (element.features.indexOf('washer') === -1) {
-            element.classList.add('hidden');
-          }
-        });
-      }
-
-      if (featuresFilter.children[8].checked === true) {
-        elements.forEach(function (element) {
-          if (element.features.indexOf('elevator') === -1) {
-            element.classList.add('hidden');
-          }
-        });
-      }
-
-      if (featuresFilter.children[10].checked === true) {
-        elements.forEach(function (element) {
-          if (element.features.indexOf('conditioner') === -1) {
-            element.classList.add('hidden');
-          }
-        });
-      }
-
+      return elements;
     }
 
     function filterByPrice(elements, value) {
-      elements.forEach(function (element) {
-        if (value === 'low' && element.price >= 10000) {
-          element.classList.add('hidden');
-        }
-
-        if (value === 'middle' && (element.price < 10000 || element.price >= 50000)) {
-          element.classList.add('hidden');
-        }
-
-        if (value === 'high' && element.price < 50000) {
-          element.classList.add('hidden');
-        }
+      return elements.filter(function (element) {
+        return (value === 'any') || (value === 'low' && element.price < 10000) || (value === 'middle' && element.price >= 10000 && element.price < 50000) || (value === 'high' && element.price >= 50000) ; 
       });
     }
 
