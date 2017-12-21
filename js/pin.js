@@ -52,7 +52,7 @@
         element.classList.add('hidden');
       });
 
-      mapPins = reducePinsToFive(mapPins);
+      mapPins = mapPins.slice(0, 6);
 
       mapPins.forEach(function (element) {
         element.classList.remove('hidden');
@@ -67,6 +67,7 @@
 
     function onFilterChange() {
       mapPins = Array.from(map.querySelectorAll('.map__pin'));
+      mapPins = mapPins.slice(1);
       mapPins.forEach(function (element) {
         element.classList.add('hidden');
       });
@@ -81,7 +82,7 @@
       mapPins = filterByFeatures(mapPins, featuresFilter.children[6]);
       mapPins = filterByFeatures(mapPins, featuresFilter.children[8]);
       mapPins = filterByFeatures(mapPins, featuresFilter.children[10]);
-      mapPins = reducePinsToFive(mapPins);
+      mapPins = mapPins.slice(0, 5);
 
       mapPins.forEach(function (element) {
         element.classList.remove('hidden');
@@ -89,10 +90,6 @@
 
       mapPinMain.classList.remove('hidden');
       mapPinMain.removeEventListener('mouseup', onMouseUpActivate);
-    }
-
-    function reducePinsToFive(elements) {
-      return elements.slice(0, 6);
     }
 
     function filterByType(elements, value) {
