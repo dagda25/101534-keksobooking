@@ -56,7 +56,7 @@
 
       mapPins.forEach(function (element) {
         element.classList.remove('hidden');
-      });  
+      });
     };
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
@@ -117,7 +117,7 @@
       if (field.checked === true) {
         return elements.filter(function (element) {
           return (element.features.indexOf(field.value) !== -1);
-        });    
+        });
       }
       return elements;
     }
