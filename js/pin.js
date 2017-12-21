@@ -56,7 +56,7 @@
 
       mapPins.forEach(function (element) {
         element.classList.remove('hidden');
-      });      
+      });  
     };
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
@@ -97,34 +97,34 @@
 
     function filterByType(elements, value) {
       return elements.filter(function (element) {
-        return (value === 'any' || element.realtyType === value); 
+        return (value === 'any' || element.realtyType === value);
       });
     }
 
     function filterByRooms(elements, value) {
       return elements.filter(function (element) {
-        return (value === 'any' || element.rooms === parseInt(value)); 
+        return (value === 'any' || element.rooms === parseInt(value, 10));
       });
     }
 
     function filterByGuests(elements, value) {
       return elements.filter(function (element) {
-        return (value === 'any' || element.guests === parseInt(value)); 
+        return (value === 'any' || element.guests === parseInt(value, 10));
       });
     }
 
     function filterByFeatures(elements, field) {
       if (field.checked === true) {
         return elements.filter(function (element) {
-          return (element.features.indexOf(field.value) !== -1); 
-        });       
+          return (element.features.indexOf(field.value) !== -1);
+        });    
       }
       return elements;
     }
 
     function filterByPrice(elements, value) {
       return elements.filter(function (element) {
-        return (value === 'any') || (value === 'low' && element.price < 10000) || (value === 'middle' && element.price >= 10000 && element.price < 50000) || (value === 'high' && element.price >= 50000) ; 
+        return (value === 'any') || (value === 'low' && element.price < 10000) || (value === 'middle' && element.price >= 10000 && element.price < 50000) || (value === 'high' && element.price >= 50000);
       });
     }
 
