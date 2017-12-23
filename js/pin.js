@@ -6,6 +6,13 @@
     var mapPinsArea = map.querySelector('.map__pins');
     var mapPinMain = map.querySelector('.map__pin--main');
     var form = document.querySelector('.notice__form');
+    var mapFilters = map.querySelector('.map__filters');
+    var typesFilter = map.querySelector('#housing-type');
+    var priceFilter = map.querySelector('#housing-price');
+    var roomsFilter = map.querySelector('#housing-rooms');
+    var guestsFilter = map.querySelector('#housing-guests');
+    var featuresFilter = map.querySelector('#housing-features');
+    mapPinMain.features = [];
 
     for (var i = 0; i < data.length; i++) {
       var PIN_WIDTH = 46;
@@ -16,6 +23,11 @@
       btn.style.top = data[i].location.y - PIN_HEIGHT + 'px';
       btn.classList.add('map__pin');
       btn.classList.add('hidden');
+      btn.realtyType = data[i].offer.type;
+      btn.price = data[i].offer.price;
+      btn.rooms = data[i].offer.rooms;
+      btn.guests = data[i].offer.guests;
+      btn.features = data[i].offer.features;
 
       var img = document.createElement('img');
       img.src = data[i].author.avatar;
@@ -29,13 +41,89 @@
       mapPinsArea.appendChild(fragmentPin);
     }
 
-    var mapPins = map.querySelectorAll('.map__pin');
+    var mapPins = Array.from(map.querySelectorAll('.map__pin'));
 
-    mapPinMain.addEventListener('mouseup', function () {
+    var onMouseUpActivate = function () {
       activateMap(map);
       activateForm(form);
       showMapPins(mapPins);
+
+      mapPins.forEach(function (element) {
+        element.classList.add('hidden');
+      });
+
+      mapPins = mapPins.slice(0, 6);
+
+      mapPins.forEach(function (element) {
+        element.classList.remove('hidden');
+      });
+    };
+
+    mapPinMain.addEventListener('mouseup', onMouseUpActivate);
+
+    mapFilters.addEventListener('change', function () {
+      window.debounce(onFilterChange);
     });
+
+    function onFilterChange() {
+      mapPins = Array.from(map.querySelectorAll('.map__pin'));
+      mapPins = mapPins.slice(1);
+      mapPins.forEach(function (element) {
+        element.classList.add('hidden');
+      });
+
+      mapPins = filterByType(mapPins, typesFilter.value);
+      mapPins = filterByPrice(mapPins, priceFilter.value);
+      mapPins = filterByRooms(mapPins, roomsFilter.value);
+      mapPins = filterByGuests(mapPins, guestsFilter.value);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[0]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[2]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[4]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[6]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[8]);
+      mapPins = filterByFeatures(mapPins, featuresFilter.children[10]);
+      mapPins = mapPins.slice(0, 5);
+
+      mapPins.forEach(function (element) {
+        element.classList.remove('hidden');
+      });
+
+      mapPinMain.classList.remove('hidden');
+      mapPinMain.removeEventListener('mouseup', onMouseUpActivate);
+    }
+
+    function filterByType(elements, value) {
+      return elements.filter(function (element) {
+        return (value === 'any' || element.realtyType === value);
+      });
+    }
+
+    function filterByRooms(elements, value) {
+      return elements.filter(function (element) {
+        return (value === 'any' || element.rooms === parseInt(value, 10));
+      });
+    }
+
+    function filterByGuests(elements, value) {
+      return elements.filter(function (element) {
+        return (value === 'any' || element.guests === parseInt(value, 10));
+      });
+    }
+
+    function filterByFeatures(elements, field) {
+      if (field.checked === true) {
+        return elements.filter(function (element) {
+          return (element.features.indexOf(field.value) !== -1);
+        });
+      }
+      return elements;
+    }
+
+    function filterByPrice(elements, value) {
+      return elements.filter(function (element) {
+        return (value === 'any') || (value === 'low' && element.price < 10000) || (value === 'middle' && element.price >= 10000 && element.price < 50000) || (value === 'high' && element.price >= 50000);
+      });
+    }
 
     return map;
   };
@@ -59,4 +147,5 @@
       mapPins[i].classList.remove('hidden');
     }
   }
+
 })();
