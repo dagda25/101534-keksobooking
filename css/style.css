@@ -723,7 +723,7 @@ textarea:focus
 
 .form__photo-container
 {
-    width: 140px;
+    width: 100%;
 }
 
 .form__element--submit
