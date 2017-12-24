@@ -1,14 +1,15 @@
 'use strict';
 
 (function () {
-  window.backend.load(onLoad, onError);
-
-  var map = document.querySelector('.map');
-  var mapPinMain = map.querySelector('.map__pin--main');
   var MAIN_PIN_WIDTH = 62;
   var MAIN_PIN_HEIGHT = 84;
   var MAP_WIDTH = 1200;
   var MAP_HEIGHT = 750;
+
+  window.backend.load(onLoad, onError);
+
+  var map = document.querySelector('.map');
+  var mapPinMain = map.querySelector('.map__pin--main');
   var address = document.querySelector('input#address');
   var addressCoords = {};
 
