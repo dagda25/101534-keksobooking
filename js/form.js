@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
   var form = document.querySelector('.notice__form');
   var timeIn = form.querySelector('select#timein');
   var timeOut = form.querySelector('select#timeout');
@@ -8,6 +9,11 @@
   var priceInput = form.querySelector('input#price');
   var roomNumber = form.querySelector('select#room_number');
   var capacity = form.querySelector('select#capacity');
+  var avatarChooser = form.querySelector('.notice__photo input[type=file]');
+  var avatarPreview = form.querySelector('.notice__preview img');
+  var photoContainer = form.querySelector('.form__photo-container');
+  var photoChooser = photoContainer.querySelector('input[type=file]');
+
 
   window.synchronizeFields(timeIn, timeOut, ['12:00', '13:00', '14:00'], ['12:00', '13:00', '14:00'], syncValues);
 
@@ -26,6 +32,50 @@
     var formData = new FormData(form);
 
     window.backend.save(formData, onUpload, window.map.onError);
+  });
+
+  avatarChooser.addEventListener('change', function () {
+    var file = avatarChooser.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        avatarPreview.src = reader.result;
+      });
+
+      reader.readAsDataURL(file);
+    }
+  });
+
+  photoChooser.addEventListener('change', function () {
+    var file = photoChooser.files[0];
+    var fileName = file.name.toLowerCase();
+
+    var matches = FILE_TYPES.some(function (it) {
+      return fileName.endsWith(it);
+    });
+
+    if (matches) {
+      var reader = new FileReader();
+
+      reader.addEventListener('load', function () {
+        var photo = document.createElement('img');
+        photo.src = reader.result;
+        photo.height = '80';
+        photo.style.maxWidth = '100%';
+        photo.style.marginTop = '10px';
+        photo.style.marginLeft = '10px';
+        photoContainer.appendChild(photo);
+      });
+
+      reader.readAsDataURL(file);
+    }
   });
 
   function syncValues(element, value) {
