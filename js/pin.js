@@ -1,6 +1,13 @@
 'use strict';
 
 (function () {
+  var PIN_WIDTH = 46;
+  var PIN_HEIGHT = 61;
+  var PIN_IMAGE = {
+    WIDTH: 40,
+    HEIGHT: 40
+  };
+
   window.createPins = function (data) {
     var map = document.querySelector('.map');
     var mapPinsArea = map.querySelector('.map__pins');
@@ -14,32 +21,30 @@
     var featuresFilter = map.querySelector('#housing-features');
     mapPinMain.features = [];
 
-    for (var i = 0; i < data.length; i++) {
-      var PIN_WIDTH = 46;
-      var PIN_HEIGHT = 61;
+    data.forEach(function(item) {
       var btn = document.createElement('button');
       var fragmentPin = document.createDocumentFragment();
-      btn.style.left = data[i].location.x - PIN_WIDTH / 2 + 'px';
-      btn.style.top = data[i].location.y - PIN_HEIGHT + 'px';
+      btn.style.left = item.location.x - PIN_WIDTH / 2 + 'px';
+      btn.style.top = item.location.y - PIN_HEIGHT + 'px';
       btn.classList.add('map__pin');
       btn.classList.add('hidden');
-      btn.realtyType = data[i].offer.type;
-      btn.price = data[i].offer.price;
-      btn.rooms = data[i].offer.rooms;
-      btn.guests = data[i].offer.guests;
-      btn.features = data[i].offer.features;
+      btn.realtyType = item.offer.type;
+      btn.price = item.offer.price;
+      btn.rooms = item.offer.rooms;
+      btn.guests = item.offer.guests;
+      btn.features = item.offer.features;
 
       var img = document.createElement('img');
-      img.src = data[i].author.avatar;
-      img.width = 40;
-      img.height = 40;
+      img.src = item.author.avatar;
+      img.width = PIN_IMAGE.WIDTH;
+      img.height = PIN_IMAGE.HEIGHT;
       img.draggable = false;
 
       btn.appendChild(img);
       fragmentPin.appendChild(btn);
 
       mapPinsArea.appendChild(fragmentPin);
-    }
+    });
 
     var mapPins = Array.from(map.querySelectorAll('.map__pin'));
 
