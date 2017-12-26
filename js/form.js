@@ -32,6 +32,8 @@
     var formData = new FormData(form);
 
     window.backend.save(formData, onUpload, window.map.onError);
+
+
   });
 
   avatarChooser.addEventListener('change', function () {
@@ -87,6 +89,8 @@
   }
 
   function onUpload() {
+    var address = document.querySelector('input#address');
+    var addressValue = address.value;
     var node = document.createElement('div');
 
     node.classList.add('success-message');
@@ -95,6 +99,8 @@
     document.body.insertAdjacentElement('afterbegin', node);
 
     form.reset();
+
+    address.value = addressValue;
 
     setTimeout(function () {
       document.body.removeChild(node);

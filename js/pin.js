@@ -33,6 +33,7 @@
       btn.rooms = item.offer.rooms;
       btn.guests = item.offer.guests;
       btn.features = item.offer.features;
+      btn.title = item.offer.title;
 
       var img = document.createElement('img');
       img.src = item.author.avatar;
@@ -48,7 +49,7 @@
 
     var mapPins = Array.from(map.querySelectorAll('.map__pin'));
 
-    var onMouseUpActivate = function () {
+    function onMouseUpActivate() {
       activateMap(map);
       activateForm(form);
       showMapPins(mapPins);
@@ -72,6 +73,7 @@
 
     function onFilterChange() {
       mapPins = Array.from(map.querySelectorAll('.map__pin'));
+      var popups = Array.from(map.querySelectorAll('.popup'));
       mapPins = mapPins.slice(1);
       mapPins.forEach(function (element) {
         element.classList.add('hidden');
@@ -95,6 +97,14 @@
 
       mapPinMain.classList.remove('hidden');
       mapPinMain.removeEventListener('mouseup', onMouseUpActivate);
+
+      mapPins = Array.from(map.querySelectorAll('.map__pin'));
+
+      mapPins.forEach(function(item, index) {
+        if (item.classList.contains('hidden')) {
+          window.map.closePopup(popups[index - 1], mapPins);
+        }
+      });
     }
 
     function filterByType(elements, value) {

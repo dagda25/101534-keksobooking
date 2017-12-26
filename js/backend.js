@@ -5,7 +5,7 @@
   var STATUS_OK = 200;
   var TIMEOUT = 10000;
 
-  var setup = function (onSuccess, onFailure) {
+  function setup(onSuccess, onFailure) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 

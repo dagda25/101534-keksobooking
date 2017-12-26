@@ -49,30 +49,9 @@
       featuresBlock.children[i].classList.add('hidden');
     }
 
-    dataElement.offer.features.forEach(function (item) {
-      switch (item) {
-        case 'wifi':
-          featuresBlock.children[0].classList.remove('hidden');
-          break;
-        case 'dishwasher':
-          featuresBlock.children[1].classList.remove('hidden');
-          break;
-        case 'parking':
-          featuresBlock.children[2].classList.remove('hidden');
-          break;
-        case 'washer':
-          featuresBlock.children[3].classList.remove('hidden');
-          break;
-        case 'elevator':
-          featuresBlock.children[4].classList.remove('hidden');
-          break;
-        case 'conditioner':
-          featuresBlock.children[5].classList.remove('hidden');
-          break;
-      }
-    });
+    checkFeatures(dataElement.offer.features, featuresBlock);
 
-    var description = element.children[0].children[9];
+    var description = element.querySelector('.popup__description');
     description.innerText = dataElement.offer.description;
 
     return element;
@@ -96,5 +75,30 @@
       return forms[1];
     }
     return forms[2];
+  }
+
+  function checkFeatures(features, block) {
+    features.forEach(function (item) {
+      switch (item) {
+        case 'wifi':
+          block.children[0].classList.remove('hidden');
+          break;
+        case 'dishwasher':
+          block.children[1].classList.remove('hidden');
+          break;
+        case 'parking':
+          block.children[2].classList.remove('hidden');
+          break;
+        case 'washer':
+          block.children[3].classList.remove('hidden');
+          break;
+        case 'elevator':
+          block.children[4].classList.remove('hidden');
+          break;
+        case 'conditioner':
+          block.children[5].classList.remove('hidden');
+          break;
+      }
+    });
   }
 })();
