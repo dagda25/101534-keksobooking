@@ -33,7 +33,6 @@
       btn.rooms = item.offer.rooms;
       btn.guests = item.offer.guests;
       btn.features = item.offer.features;
-      btn.title = item.offer.title;
 
       var img = document.createElement('img');
       img.src = item.author.avatar;
