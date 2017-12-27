@@ -78,25 +78,32 @@
   }
 
   function checkFeatures(features, block) {
+    var wifi = block.querySelector('.feature--wifi');
+    var dishwasher = block.querySelector('.feature--dishwasher');
+    var parking = block.querySelector('.feature--parking');
+    var washer = block.querySelector('.feature--washer');
+    var elevator = block.querySelector('.feature--elevator');
+    var conditioner = block.querySelector('.feature--conditioner');
+
     features.forEach(function (item) {
       switch (item) {
         case 'wifi':
-          block.children[0].classList.remove('hidden');
+          wifi.classList.remove('hidden');
           break;
         case 'dishwasher':
-          block.children[1].classList.remove('hidden');
+          dishwasher.classList.remove('hidden');
           break;
         case 'parking':
-          block.children[2].classList.remove('hidden');
+          parking.classList.remove('hidden');
           break;
         case 'washer':
-          block.children[3].classList.remove('hidden');
+          washer.classList.remove('hidden');
           break;
         case 'elevator':
-          block.children[4].classList.remove('hidden');
+          elevator.classList.remove('hidden');
           break;
         case 'conditioner':
-          block.children[5].classList.remove('hidden');
+          conditioner.classList.remove('hidden');
           break;
       }
     });
