@@ -27,7 +27,7 @@
     xhr.timeout = TIMEOUT;
 
     return xhr;
-  };
+  }
 
   function load(onSuccess, onFailure) {
     var xhr = setup(onSuccess, onFailure);

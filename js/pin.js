@@ -21,7 +21,7 @@
     var featuresFilter = map.querySelector('#housing-features');
     mapPinMain.features = [];
 
-    data.forEach(function(item) {
+    data.forEach(function (item) {
       var btn = document.createElement('button');
       var fragmentPin = document.createDocumentFragment();
       btn.style.left = item.location.x - PIN_WIDTH / 2 + 'px';
@@ -62,7 +62,7 @@
       mapPins.forEach(function (element) {
         element.classList.remove('hidden');
       });
-    };
+    }
 
     mapPinMain.addEventListener('mouseup', onMouseUpActivate);
 
@@ -99,7 +99,7 @@
 
       mapPins = Array.from(map.querySelectorAll('.map__pin'));
 
-      mapPins.forEach(function(item, index) {
+      mapPins.forEach(function (item, index) {
         if (item.classList.contains('hidden')) {
           window.map.closePopup(popups[index - 1], mapPins);
         }

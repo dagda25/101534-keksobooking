@@ -61,14 +61,14 @@
       mapPinMain.style.left = addressCoords.x + 'px';
 
       address.value = 'x: ' + addressCoords.x + ', y: ' + addressCoords.y;
-    };
+    }
 
     function onMouseUp(upEvt) {
       upEvt.preventDefault();
 
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-    };
+    }
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
@@ -148,7 +148,7 @@
   }
 
   function deactivatePins(elements) {
-    elements.forEach(function(item, index) {
+    elements.forEach(function (item, index) {
       if (index > 0) {
         item.classList.remove('map__pin--active');
       }

@@ -93,30 +93,30 @@
   function syncRoomsAndGuests(element, value) {
     switch (value) {
       case '0':
-        [].forEach.call(element.options, function (item, i) {
+        [].forEach.call(element.options, function (item) {
           item.hidden = (item.value !== '0');
           item.selected = (item.value === '0');
         });
         break;
       case '1':
-        [].forEach.call(element.options, function (item, i) {
+        [].forEach.call(element.options, function (item) {
           item.hidden = (item.value !== '1');
           item.selected = (item.value === '1');
         });
         break;
       case '2':
-        [].forEach.call(element.options, function (item, i) {
+        [].forEach.call(element.options, function (item) {
           item.hidden = (item.value === '3' || item.value === '0');
           item.selected = (item.value === '1');
         });
         break;
       case '3':
-        [].forEach.call(element.options, function (item, i) {
+        [].forEach.call(element.options, function (item) {
           item.hidden = (item.value === '0');
-         item.selected = (item.value === '1');
+          item.selected = (item.value === '1');
         });
         break;
-    };
+    }
 
   }
 

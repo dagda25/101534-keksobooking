@@ -4,7 +4,7 @@
   window.createAds = function (data) {
     var fragmentAd = document.createDocumentFragment();
 
-    data.forEach(function(item) {
+    data.forEach(function (item) {
       fragmentAd.appendChild(createAd(item));
     });
 
@@ -55,15 +55,6 @@
     description.innerText = dataElement.offer.description;
 
     return element;
-  }
-
-  function getLocalName(realtyType) {
-    if (realtyType === 'flat') {
-      return 'Квартира';
-    } else if (realtyType === 'house') {
-      return 'Дом';
-    }
-    return 'Бунгало';
   }
 
   function getPluralEnding(number, forms) {
