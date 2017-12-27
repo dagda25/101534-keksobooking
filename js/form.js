@@ -21,17 +21,25 @@
 
   window.synchronizeFields(type, priceInput, ['bungalo', 'flat', 'house', 'palace'], [0, 1000, 5000, 10000], syncValueWithMin);
 
-  window.synchronizeFields(roomNumber, capacity, ['100', '1', '2', '3'], ['0', '1', '2', '3'], syncValues);
+  window.synchronizeFields(roomNumber, capacity, ['100', '1', '2', '3'], ['0', '1', '2', '3'], syncRoomsAndGuests);
+
 
   form.addEventListener('invalid', function (evt) {
     evt.target.style.outline = '3px solid red';
   }, true);
+
+  capacity.addEventListener('change', function (evt) {
+    if (evt.target.value === '0') {
+      roomNumber.value = '100';
+    }
+  });
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     var formData = new FormData(form);
 
     window.backend.save(formData, onUpload, window.map.onError);
+
   });
 
   avatarChooser.addEventListener('change', function () {
@@ -82,11 +90,43 @@
     element.value = value;
   }
 
+  function syncRoomsAndGuests(element, value) {
+    switch (value) {
+      case '0':
+        [].forEach.call(element.options, function (item) {
+          item.hidden = (item.value !== '0');
+          item.selected = (item.value === '0');
+        });
+        break;
+      case '1':
+        [].forEach.call(element.options, function (item) {
+          item.hidden = (item.value !== '1');
+          item.selected = (item.value === '1');
+        });
+        break;
+      case '2':
+        [].forEach.call(element.options, function (item) {
+          item.hidden = (item.value === '3' || item.value === '0');
+          item.selected = (item.value === '1');
+        });
+        break;
+      case '3':
+        [].forEach.call(element.options, function (item) {
+          item.hidden = (item.value === '0');
+          item.selected = (item.value === '1');
+        });
+        break;
+    }
+
+  }
+
   function syncValueWithMin(element, value) {
     element.min = value;
   }
 
   function onUpload() {
+    var address = document.querySelector('input#address');
+    var addressValue = address.value;
     var node = document.createElement('div');
 
     node.classList.add('success-message');
@@ -95,6 +135,8 @@
     document.body.insertAdjacentElement('afterbegin', node);
 
     form.reset();
+
+    address.value = addressValue;
 
     setTimeout(function () {
       document.body.removeChild(node);

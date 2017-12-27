@@ -4,9 +4,9 @@
   window.createAds = function (data) {
     var fragmentAd = document.createDocumentFragment();
 
-    for (var i = 0; i < data.length; i++) {
-      fragmentAd.appendChild(createAd(data[i]));
-    }
+    data.forEach(function (item) {
+      fragmentAd.appendChild(createAd(item));
+    });
 
     return fragmentAd;
   };
@@ -20,66 +20,41 @@
     var avatar = element.querySelector('.popup__avatar');
     avatar.src = dataElement.author.avatar;
 
-    var title = element.children[0].children[2];
+    var title = element.querySelector('.popup__title');
     title.innerText = dataElement.offer.title;
 
-    var address = element.children[0].children[3].children[0];
+    var address = element.querySelector('.popup__address');
     address.innerText = dataElement.offer.address;
 
-    var price = element.children[0].children[4];
+    var price = element.querySelector('.popup__price');
     price.innerHTML = dataElement.offer.price + ' &#8381;/ночь';
 
-    var type = element.children[0].children[5];
-    type.innerText = getLocalName(dataElement.offer.type);
+    var type = element.querySelector('.popup__type');
+    var AppartmentType = {
+      flat: 'Квартира',
+      house: 'Дом',
+      bungalo: 'Бунгало'
+    };
+    type.innerText = AppartmentType[dataElement.offer.type];
 
-    var rooms = element.children[0].children[6];
+    var rooms = element.querySelector('.popup__rooms');
     rooms.innerText = dataElement.offer.rooms + ' ' + getPluralEnding(dataElement.offer.rooms, ['комната', 'комнаты', 'комнат']) + ' для ' + dataElement.offer.guests + ' ' + getPluralEnding(dataElement.offer.guests, ['гостя', 'гостей', 'гостей']);
 
-    var checkin = element.children[0].children[7];
+    var checkin = element.querySelector('.popup__checkin');
     checkin.innerText = 'Заезд после ' + dataElement.offer.checkin + ', выезд до ' + dataElement.offer.checkout;
 
-    var featuresBlock = element.children[0].children[8];
+    var featuresBlock = element.querySelector('.popup__features');
 
     for (var i = 0; i < featuresBlock.children.length; i++) {
       featuresBlock.children[i].classList.add('hidden');
     }
 
-    dataElement.offer.features.forEach(function (item) {
-      switch (item) {
-        case 'wifi':
-          featuresBlock.children[0].classList.remove('hidden');
-          break;
-        case 'dishwasher':
-          featuresBlock.children[1].classList.remove('hidden');
-          break;
-        case 'parking':
-          featuresBlock.children[2].classList.remove('hidden');
-          break;
-        case 'washer':
-          featuresBlock.children[3].classList.remove('hidden');
-          break;
-        case 'elevator':
-          featuresBlock.children[4].classList.remove('hidden');
-          break;
-        case 'conditioner':
-          featuresBlock.children[5].classList.remove('hidden');
-          break;
-      }
-    });
+    checkFeatures(dataElement.offer.features, featuresBlock);
 
-    var description = element.children[0].children[9];
+    var description = element.querySelector('.popup__description');
     description.innerText = dataElement.offer.description;
 
     return element;
-  }
-
-  function getLocalName(realtyType) {
-    if (realtyType === 'flat') {
-      return 'Квартира';
-    } else if (realtyType === 'house') {
-      return 'Дом';
-    }
-    return 'Бунгало';
   }
 
   function getPluralEnding(number, forms) {
@@ -91,5 +66,37 @@
       return forms[1];
     }
     return forms[2];
+  }
+
+  function checkFeatures(features, block) {
+    var wifi = block.querySelector('.feature--wifi');
+    var dishwasher = block.querySelector('.feature--dishwasher');
+    var parking = block.querySelector('.feature--parking');
+    var washer = block.querySelector('.feature--washer');
+    var elevator = block.querySelector('.feature--elevator');
+    var conditioner = block.querySelector('.feature--conditioner');
+
+    features.forEach(function (item) {
+      switch (item) {
+        case 'wifi':
+          wifi.classList.remove('hidden');
+          break;
+        case 'dishwasher':
+          dishwasher.classList.remove('hidden');
+          break;
+        case 'parking':
+          parking.classList.remove('hidden');
+          break;
+        case 'washer':
+          washer.classList.remove('hidden');
+          break;
+        case 'elevator':
+          elevator.classList.remove('hidden');
+          break;
+        case 'conditioner':
+          conditioner.classList.remove('hidden');
+          break;
+      }
+    });
   }
 })();
